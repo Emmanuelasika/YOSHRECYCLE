@@ -47,11 +47,8 @@ export default function AboutPage() {
 
             {/* Custom "History" or "Values" section could go here */}
             {/* Challenge & Solution */}
-            <section className="py-32 px-[5vw] bg-neutral-50 relative overflow-hidden">
-                {/* Decorative Background */}
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-neutral-100/50 -skew-x-12 translate-x-1/4"></div>
-
-                <div className="max-w-[1800px] mx-auto grid lg:grid-cols-2 gap-20 items-center relative z-10">
+            <section className="py-24 px-[5vw] bg-white">
+                <div className="max-w-[1800px] mx-auto grid lg:grid-cols-2 gap-20 items-center">
                     {/* Visual Side */}
                     <div className="relative">
                         <BeforeAfterSlider
@@ -60,44 +57,35 @@ export default function AboutPage() {
                             beforeLabel="The Crisis"
                             afterLabel="The Future"
                         />
-
-                        {/* Floating Stats Card */}
-                        <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl max-w-xs hidden md:block border border-neutral-100 z-40">
-                            <span className="text-4xl font-bold text-red-500 block mb-1">13k</span>
-                            <span className="text-neutral-500 text-xs font-medium uppercase tracking-widest">Tonnes/day</span>
-                        </div>
                     </div>
 
                     {/* Content Side */}
-                    <div className="space-y-16">
-                        {/* Challenge Block */}
-                        <div className="relative pl-8 border-l-4 border-red-500/20">
-                            <span className="text-red-500 font-bold tracking-widest uppercase text-xs mb-2 block">The Problem</span>
+                    <div className="space-y-12">
+                        <div>
                             <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-6 text-black">
                                 The Urban <br /> <span className="text-red-500">Waste Crisis</span>
                             </h2>
-                            <p className="text-xl text-neutral-600 leading-relaxed">
-                                Lagos generates thousands of tons of waste daily, much of which ends up clogging our waterways, polluting our streets, and endangering public health.
+                            <p className="text-xl text-neutral-600 leading-relaxed max-w-xl">
+                                Lagos generates over <span className="font-bold text-black bg-yellow-100 px-1">13,000 tonnes</span> of waste daily. Much of this ends up clogging our waterways, polluting our streets, and endangering public health.
                             </p>
                         </div>
 
-                        {/* Solution Block */}
-                        <div className="relative pl-8 border-l-4 border-[#63C14B]">
-                            <span className="text-[#63C14B] font-bold tracking-widest uppercase text-xs mb-2 block">Our Solution</span>
+                        <div>
                             <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-6 text-black">
-                                Turning Trash <br /> <span className="text-[#63C14B]">Into Treasure</span>
+                                <span className="text-[#63C14B]">Our Solution</span>
                             </h2>
-                            <p className="text-xl text-neutral-600 leading-relaxed mb-6">
-                                We don't just pick up trash; we re-engineer the value chain. By incentivizing collection and streamlining the recycling process, we turn "waste" into a valuable resource that powers industry.
+                            <p className="text-xl text-neutral-600 leading-relaxed mb-8 max-w-xl">
+                                We turn "waste" into a valuable resource. By incentivizing collection and streamlining the recycling process, we support local collectors and provide high-quality feedstock for manufacturing.
                             </p>
-                            <ul className="space-y-4">
-                                {["Incentivized Collection", "Community Efficiency", "Industrial Feedstock"].map((item, i) => (
-                                    <li key={i} className="flex items-center gap-3 text-lg font-medium">
-                                        <div className="w-2 h-2 rounded-full bg-[#63C14B]"></div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                {["Incentivized Collection", "Community Efficiency", "Industrial Feedstock", "Cleaner Neighborhoods"].map((item, i) => (
+                                    <div key={i} className="flex items-center gap-2 text-base font-medium text-neutral-800">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-[#63C14B]"></div>
                                         {item}
-                                    </li>
+                                    </div>
                                 ))}
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
