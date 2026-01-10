@@ -52,8 +52,8 @@ export default function AboutPage() {
                     {/* Visual Side */}
                     <div className="relative">
                         <BeforeAfterSlider
-                            beforeImage="/assets/images/about_river_polluted_1768049267791.png"
-                            afterImage="/assets/images/about_river_clean_1768049251442.png"
+                            beforeImage="/assets/images/about_river_polluted_v2.png"
+                            afterImage="/assets/images/about_river_clean_v2.png"
                             beforeLabel="The Crisis"
                             afterLabel="The Future"
                         />
