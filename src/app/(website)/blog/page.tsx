@@ -15,14 +15,14 @@ export default async function BlogPage() {
     const posts = await client.fetch(POSTS_QUERY);
 
     return (
-        <main className="min-h-screen bg-white pt-40 pb-32 px-[5vw]">
+        <main className="min-h-screen bg-white pt-32 md:pt-40 pb-32 px-6 md:px-[5vw]">
             <div className="max-w-[1800px] mx-auto">
 
                 {/* Brand Header */}
-                <div className="flex flex-col md:flex-row justify-between items-end mb-32 border-b border-black/10 pb-12">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-32 border-b border-black/10 pb-12">
                     <div>
                         <span className="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">Our Journal</span>
-                        <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.85]">
+                        <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.9] md:leading-[0.85]">
                             Our <br /> <span className="text-[#63C14B]">Blog</span>
                         </h1>
                     </div>
