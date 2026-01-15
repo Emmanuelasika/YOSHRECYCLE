@@ -9,7 +9,8 @@ import { ArrowLeft } from "lucide-react";
 
 export const revalidate = 60;
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage(props: { params: Promise<{ slug: string }> }) {
+    const params = await props.params;
     const post = await client.fetch(POST_QUERY, params);
 
     if (!post) {
