@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { ShareButtons } from "@/components/blog/ShareButtons";
 
 export const revalidate = 60;
 
@@ -30,7 +31,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                 <div className="mb-12">
                     <Link href="/blog">
                         <Button variant="outline" className="pl-6 group border-black/10 hover:border-black">
-                            <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Back to Archive
+                            <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Back to Blog
                         </Button>
                     </Link>
                 </div>
@@ -112,11 +113,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                             <h3 className="text-2xl font-bold uppercase tracking-tight mb-2">Share this story</h3>
                             <p className="text-neutral-500">Help us spread the word about sustainable living.</p>
                         </div>
-                        <div className="flex gap-4">
-                            <Button variant="outline" className="rounded-full">Twitter</Button>
-                            <Button variant="outline" className="rounded-full">LinkedIn</Button>
-                            <Button variant="outline" className="rounded-full">Facebook</Button>
-                        </div>
+                        <ShareButtons title={post.title} slug={params.slug} />
                     </div>
                 </div>
 

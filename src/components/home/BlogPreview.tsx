@@ -20,12 +20,10 @@ export function BlogPreview() {
         client.fetch(RECENT_POSTS_QUERY).then((data) => setPosts(data));
     }, []);
 
-    // Placeholder data matching Yosh Brand
-    const displayPosts = posts.length > 0 ? posts : [
-        { _id: '1', title: 'The Future of Waste is Circular', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'How we are redesigning the economy.' },
-        { _id: '2', title: 'Community Impact Report 2026', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'See the numbers behind the movement.' },
-        { _id: '3', title: 'Zero Waste Living Guide', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'Practical steps for every household.' }
-    ];
+    // If no posts, hide the section entirely
+    if (!posts || posts.length === 0) {
+        return null;
+    }
 
     return (
         <section className="py-32 px-6 bg-white border-t border-black/5">
@@ -58,7 +56,7 @@ export function BlogPreview() {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {displayPosts.map((post, index) => (
+                    {posts.map((post, index) => (
                         <motion.div
                             key={post._id}
                             initial={{ opacity: 0, y: 40 }}
