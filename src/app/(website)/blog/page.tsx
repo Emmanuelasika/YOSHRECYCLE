@@ -9,102 +9,69 @@ export const revalidate = 60;
 
 export default async function BlogPage() {
     const posts = await client.fetch(POSTS_QUERY);
-    const featuredPost = posts[0];
-    const remainingPosts = posts.slice(1);
 
     return (
-        <main className="min-h-screen bg-white text-black pt-32 md:pt-40 px-6 pb-24">
+        <main className="min-h-screen bg-white text-black pt-40 px-6 pb-32">
             <div className="max-w-[1600px] mx-auto">
-                {/* Header */}
-                <div className="mb-24 text-center md:text-left">
-                    <span className="text-[#63C14B] font-bold tracking-widest uppercase text-sm mb-4 block animate-in fade-in slide-in-from-bottom-4 duration-700">
-                        Yosh Recycle
-                    </span>
-                    <h1 className="text-[12vw] md:text-[10vw] leading-[0.85] font-black tracking-tighter text-black uppercase animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
-                        The <br className="md:hidden" /> <span className="text-transparent bg-clip-text bg-gradient-to-br from-neutral-800 to-neutral-400">Journal</span>
+                {/* Minimal Header */}
+                <div className="flex flex-col md:flex-row justify-between items-end mb-32 border-b border-black pb-8">
+                    <h1 className="text-[15vw] md:text-[12vw] leading-[0.8] font-black tracking-tighter uppercase">
+                        News<span className="text-[#63C14B]">Room</span>
                     </h1>
+                    <p className="text-xl md:text-2xl font-medium max-w-sm mb-4 md:mb-2 text-neutral-500">
+                        Stories about sustainability, recycling, and our journey to zero waste.
+                    </p>
                 </div>
 
-                {/* Featured Post */}
-                {featuredPost && (
-                    <div className="mb-32 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-200">
-                        <Link href={`/blog/${featuredPost.slug.current}`} className="group block relative">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                                <div className="aspect-[16/9] lg:aspect-[4/3] relative rounded-[2rem] overflow-hidden bg-neutral-100 shadow-2xl">
-                                    {featuredPost.mainImage && (
-                                        <Image
-                                            src={urlFor(featuredPost.mainImage).width(1200).height(900).url()}
-                                            alt={featuredPost.title}
-                                            fill
-                                            className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                                            priority
-                                        />
-                                    )}
-                                    <div className="absolute top-6 left-6 bg-white px-4 py-2 rounded-full font-bold uppercase tracking-widest text-xs shadow-lg">
-                                        Featured Story
-                                    </div>
-                                </div>
-
-                                <div className="lg:pr-12">
-                                    <span className="text-neutral-400 font-bold uppercase tracking-widest text-xs mb-6 block">
-                                        {featuredPost.publishedAt ? new Date(featuredPost.publishedAt).toLocaleDateString() : 'Recent'}
-                                    </span>
-                                    <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight leading-none mb-8 group-hover:text-[#63C14B] transition-colors">
-                                        {featuredPost.title}
-                                    </h2>
-                                    {featuredPost.excerpt && (
-                                        <p className="text-xl text-neutral-500 leading-relaxed mb-8 max-w-xl">
-                                            {featuredPost.excerpt}
-                                        </p>
-                                    )}
-                                    <div className="flex items-center gap-3 font-bold uppercase tracking-widest text-sm group-hover:text-[#63C14B] transition-colors">
-                                        Read Full Article <ArrowUpRight size={18} />
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
-                )}
-
-                {/* Remaining Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                    {remainingPosts.map((post: any) => (
-                        <Link href={`/blog/${post.slug.current}`} key={post._id} className="group cursor-pointer block">
-                            <div className="aspect-[3/2] bg-neutral-100 relative overflow-hidden rounded-2xl mb-8">
+                {/* Grid Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20">
+                    {posts.map((post: any) => (
+                        <Link href={`/blog/${post.slug.current}`} key={post._id} className="group block h-full">
+                            <div className="aspect-[4/3] relative rounded-none overflow-hidden bg-neutral-100 mb-6 border border-black">
                                 {post.mainImage ? (
                                     <Image
                                         src={urlFor(post.mainImage).width(800).height(600).url()}
                                         alt={post.title}
                                         fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-neutral-400 font-mono text-sm uppercase">No Image</div>
+                                    <div className="w-full h-full flex items-center justify-center bg-neutral-100 text-neutral-400 uppercase font-mono text-sm">
+                                        No Image
+                                    </div>
                                 )}
+
+                                <div className="absolute top-4 rights-4 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white px-3 py-1 text-xs font-mono uppercase">
+                                    Read
+                                </div>
                             </div>
 
-                            <div className="space-y-4">
-                                <span className="text-xs font-bold uppercase tracking-widest text-[#63C14B]">
-                                    {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Archive'}
-                                </span>
-                                <h2 className="text-3xl font-bold uppercase leading-none tracking-tight group-hover:text-[#63C14B] transition-colors">
+                            <div className="flex flex-col gap-3">
+                                <div className="flex justify-between items-center border-t border-black pt-3">
+                                    <span className="font-mono text-xs uppercase text-neutral-500">
+                                        {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Draft'}
+                                    </span>
+                                    <ArrowUpRight size={16} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+                                </div>
+
+                                <h2 className="text-3xl font-bold uppercase leading-[0.9] tracking-tight group-hover:text-[#63C14B] transition-colors">
                                     {post.title}
                                 </h2>
                                 {post.excerpt && (
-                                    <p className="text-neutral-500 line-clamp-2">
+                                    <p className="text-neutral-500 text-sm line-clamp-2 leading-relaxed">
                                         {post.excerpt}
                                     </p>
                                 )}
                             </div>
                         </Link>
                     ))}
-                </div>
 
-                {posts.length === 0 && (
-                    <div className="text-center py-40 bg-neutral-50 rounded-3xl">
-                        <p className="text-xl text-neutral-400 font-bold uppercase tracking-widest">Journal Empty</p>
-                    </div>
-                )}
+                    {posts.length === 0 && (
+                        <div className="col-span-full py-20 text-center border border-dashed border-neutral-300">
+                            <p className="text-neutral-400 font-mono uppercase">No stories published yet.</p>
+                        </div>
+                    )}
+                </div>
             </div>
         </main>
     );
