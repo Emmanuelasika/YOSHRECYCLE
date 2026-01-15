@@ -84,6 +84,22 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                     <PortableText
                         value={post.body}
                         components={{
+                            block: {
+                                h1: ({ children }) => <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 mt-12">{children}</h1>,
+                                h2: ({ children }) => <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-4 mt-10">{children}</h2>,
+                                h3: ({ children }) => <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mb-4 mt-8">{children}</h3>,
+                                h4: ({ children }) => <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-4 mt-8">{children}</h4>,
+                                normal: ({ children }) => <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground">{children}</p>,
+                                blockquote: ({ children }) => (
+                                    <blockquote className="mt-6 border-l-2 border-primary pl-6 italic text-muted-foreground">
+                                        {children}
+                                    </blockquote>
+                                ),
+                            },
+                            list: {
+                                bullet: ({ children }) => <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-muted-foreground">{children}</ul>,
+                                number: ({ children }) => <ol className="my-6 ml-6 list-decimal [&>li]:mt-2 text-muted-foreground">{children}</ol>,
+                            },
                             types: {
                                 image: ({ value }) => (
                                     <figure className="my-10">
