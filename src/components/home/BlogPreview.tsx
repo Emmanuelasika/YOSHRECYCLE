@@ -20,10 +20,19 @@ export function BlogPreview() {
         client.fetch(RECENT_POSTS_QUERY).then((data) => setPosts(data));
     }, []);
 
-    // If no posts, hide the section entirely
-    if (!posts || posts.length === 0) {
+    // If no posts, hide in production. Show placeholder in Dev for visibility.
+    const isDev = process.env.NODE_ENV === 'development';
+
+    if ((!posts || posts.length === 0) && !isDev) {
         return null;
     }
+
+    const displayPosts = (posts && posts.length > 0) ? posts : [
+        { _id: '1', title: 'Start Your First Post in Sanity', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'This is a preview placeholder visible only in Development mode. Publish a post to see real data.' },
+        { _id: '2', title: 'Example Blog Post Title', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'Your amazing content will appear here once published.' },
+        { _id: '3', title: 'Another Placeholder Entry', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'Go to /studio to create your first story.' }
+    ];
+
 
     return (
         <section className="py-32 px-6 bg-white border-t border-black/5">
@@ -56,7 +65,7 @@ export function BlogPreview() {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {posts.map((post, index) => (
+                    {displayPosts.map((post, index) => (
                         <motion.div
                             key={post._id}
                             initial={{ opacity: 0, y: 40 }}
