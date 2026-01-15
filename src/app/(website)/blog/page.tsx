@@ -15,7 +15,7 @@ export default async function BlogPage() {
     const posts = await client.fetch(POSTS_QUERY);
 
     return (
-        <main className="min-h-screen bg-white pt-40 pb-32 px-6">
+        <main className="min-h-screen bg-white pt-40 pb-32 px-[5vw]">
             <div className="max-w-[1800px] mx-auto">
 
                 {/* Brand Header */}
@@ -23,7 +23,7 @@ export default async function BlogPage() {
                     <div>
                         <span className="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">Our Journal</span>
                         <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.85]">
-                            The <br /> <span className="text-[#63C14B]">Archive</span>
+                            Our <br /> <span className="text-[#63C14B]">Blog</span>
                         </h1>
                     </div>
                     <p className="text-xl md:text-2xl font-medium text-neutral-500 max-w-md text-right mt-8 md:mt-0">

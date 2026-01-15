@@ -27,10 +27,10 @@ export function Navigation() {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                    "fixed top-0 left-0 w-full z-50 py-6 px-[5vw] flex justify-between items-center transition-colors duration-300",
-                    isScrolled || isMobileMenuOpen
-                        ? "bg-white/0 backdrop-blur-none text-black border-transparent"
-                        : isLightPage ? "text-black bg-white/0" : "text-white bg-white/0"
+                    "fixed top-0 left-0 w-full z-50 py-6 px-[5vw] flex justify-between items-center transition-all duration-300",
+                    isScrolled
+                        ? "bg-white/90 backdrop-blur-md text-black shadow-sm"
+                        : (isLightPage || pathname.startsWith('/blog')) ? "text-black bg-transparent" : "text-white bg-transparent"
                 )}
             >
                 <Link href="/" className="relative w-40 h-16 z-50">
