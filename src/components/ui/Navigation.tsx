@@ -48,7 +48,7 @@ export function Navigation() {
                     <Link href="/about" className="hover:text-[#63C14B] transition-colors">About</Link>
                     <Link href="/team" className="hover:text-[#63C14B] transition-colors">Team</Link>
                     <Link href="/sponsor" className="hover:text-[#63C14B] transition-colors">Sponsor</Link>
-                    <Link href="/blog" className="hover:text-[#63C14B] transition-colors">News</Link>
+                    <Link href="/blog" className="hover:text-[#63C14B] transition-colors">Blog</Link>
                     <Link href="/faq" className="hover:text-[#63C14B] transition-colors">FAQ</Link>
                     <Link href="/contact" className="hover:text-[#63C14B] transition-colors">Contact</Link>
                 </nav>
@@ -84,7 +84,7 @@ export function Navigation() {
                         { name: "About", href: "/about" },
                         { name: "Team", href: "/team" },
                         { name: "Sponsor", href: "/sponsor" },
-                        { name: "News", href: "/blog" },
+                        { name: "Blog", href: "/blog" },
                         { name: "FAQ", href: "/faq" },
                         { name: "Contact", href: "/contact" }
                     ].map((item, i) => (
