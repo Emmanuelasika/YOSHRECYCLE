@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import { POSTS_QUERY } from "@/sanity/lib/queries";
+import { PAGINATED_POSTS_QUERY, POSTS_COUNT_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,11 +8,29 @@ import { ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { PaginationControls } from "@/components/ui/pagination-controls";
 
 export const revalidate = 60;
 
-export default async function BlogPage() {
-    const posts = await client.fetch(POSTS_QUERY);
+const POSTS_PER_PAGE = 9;
+
+interface BlogPageProps {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function BlogPage(props: BlogPageProps) {
+    const searchParams = await props.searchParams;
+    const page = Number(searchParams.page) || 1;
+    const start = (page - 1) * POSTS_PER_PAGE;
+    const end = start + POSTS_PER_PAGE;
+
+    // Parallel data fetching
+    const [posts, totalPosts] = await Promise.all([
+        client.fetch(PAGINATED_POSTS_QUERY, { start, end }),
+        client.fetch(POSTS_COUNT_QUERY)
+    ]);
+
+    const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
     return (
         <main className="min-h-screen bg-white pt-32 md:pt-40 pb-32 px-6 md:px-[5vw]">
@@ -21,7 +39,7 @@ export default async function BlogPage() {
                 {/* Brand Header */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-32 border-b border-black/10 pb-12">
                     <div>
-                        <span className="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">Our Journal</span>
+                        <span className="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">Latest Updates</span>
                         <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.9] md:leading-[0.85]">
                             Our <br /> <span className="text-[#63C14B]">Blog</span>
                         </h1>
@@ -61,7 +79,7 @@ export default async function BlogPage() {
                                         </span>
                                     </div>
 
-                                    <h2 className="text-4xl font-bold uppercase leading-[0.9] tracking-tight mb-4 group-hover:text-[#63C14B] transition-colors">
+                                    <h2 className="text-4xl font-bold uppercase leading-tight tracking-tight mb-4 group-hover:text-[#63C14B] transition-colors">
                                         {post.title}
                                     </h2>
 
@@ -81,13 +99,19 @@ export default async function BlogPage() {
                     ))}
                 </div>
 
+                {/* Empty State */}
                 {posts.length === 0 && (
                     <div className="py-40 text-center bg-neutral-50 rounded-[2rem] border border-dashed border-neutral-200">
-                        <h3 className="text-2xl font-bold uppercase tracking-tight mb-4">No Stories Yet</h3>
-                        <p className="text-neutral-500 mb-8">The archive is currently empty.</p>
-                        <Button>Return Home</Button>
+                        <h3 className="text-2xl font-bold uppercase tracking-tight mb-4">No Stories Found</h3>
+                        <p className="text-neutral-500 mb-8">There are no posts for this page.</p>
+                        <Link href="/blog">
+                            <Button>Back to Start</Button>
+                        </Link>
                     </div>
                 )}
+
+                {/* Pagination */}
+                <PaginationControls currentPage={page} totalPages={totalPages} baseUrl="/blog" />
 
             </div>
         </main>

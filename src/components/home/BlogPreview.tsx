@@ -20,19 +20,10 @@ export function BlogPreview() {
         client.fetch(RECENT_POSTS_QUERY).then((data) => setPosts(data));
     }, []);
 
-    // If no posts, hide in production. Show placeholder in Dev for visibility.
-    const isDev = process.env.NODE_ENV === 'development';
-
-    if ((!posts || posts.length === 0) && !isDev) {
+    // If no posts, hide the section entirely
+    if (!posts || posts.length === 0) {
         return null;
     }
-
-    const displayPosts = (posts && posts.length > 0) ? posts : [
-        { _id: '1', title: 'Start Your First Post in Sanity', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'This is a preview placeholder visible only in Development mode. Publish a post to see real data.' },
-        { _id: '2', title: 'Example Blog Post Title', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'Your amazing content will appear here once published.' },
-        { _id: '3', title: 'Another Placeholder Entry', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'Go to /studio to create your first story.' }
-    ];
-
 
     return (
         <section className="py-32 px-6 bg-white border-t border-black/5">
@@ -47,7 +38,7 @@ export function BlogPreview() {
                         className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none"
                     >
                         Latest <br />
-                        <span className="text-[#63C14B]">Intelligence</span>
+                        <span className="text-[#63C14B]">Blog</span>
                     </motion.h2>
 
                     <motion.div
@@ -57,7 +48,7 @@ export function BlogPreview() {
                     >
                         <Link href="/blog">
                             <Button size="lg" className="hidden md:inline-flex bg-black text-white hover:bg-[#63C14B] hover:text-black">
-                                View Journal <ArrowUpRight className="ml-2 h-4 w-4" />
+                                View Blog <ArrowUpRight className="ml-2 h-4 w-4" />
                             </Button>
                         </Link>
                     </motion.div>
@@ -65,7 +56,7 @@ export function BlogPreview() {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {displayPosts.map((post, index) => (
+                    {posts.map((post, index) => (
                         <motion.div
                             key={post._id}
                             initial={{ opacity: 0, y: 40 }}
@@ -106,7 +97,7 @@ export function BlogPreview() {
                                             </div>
                                         </div>
 
-                                        <h3 className="text-3xl font-bold uppercase leading-none tracking-tight mb-4 group-hover:text-[#63C14B] transition-colors">
+                                        <h3 className="text-3xl font-bold uppercase leading-tight tracking-tight mb-4 group-hover:text-[#63C14B] transition-colors">
                                             {post.title}
                                         </h3>
 
@@ -124,7 +115,7 @@ export function BlogPreview() {
 
                 <div className="mt-12 md:hidden w-full">
                     <Link href="/blog" className="block w-full">
-                        <Button size="lg" className="w-full bg-black text-white">View Journal</Button>
+                        <Button size="lg" className="w-full bg-black text-white">View Blog</Button>
                     </Link>
                 </div>
             </div>

@@ -6,6 +6,6 @@ export const client = createClient({
     projectId,
     dataset,
     apiVersion,
-    useCdn,
+    useCdn: false, // Set to false to ensure fresh data during development
     perspective: 'published',
 })
