@@ -5,7 +5,12 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 
 export const revalidate = 60;
 
@@ -18,46 +23,46 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
     }
 
     return (
-        <article className="min-h-screen bg-white text-black pt-32 pb-24">
-            {/* Reading Container */}
-            <div className="max-w-3xl mx-auto px-6">
+        <article className="min-h-screen bg-background pt-32 pb-24">
+            <div className="container px-4 md:px-6 mx-auto max-w-3xl">
 
-                {/* Back Link */}
-                <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 mb-10 hover:text-[#63C14B] transition-colors">
-                    <ArrowLeft size={16} /> Back to Blog
-                </Link>
+                <Button variant="ghost" asChild className="mb-8 pl-0 hover:pl-0 hover:bg-transparent text-muted-foreground hover:text-foreground">
+                    <Link href="/blog" className="gap-2">
+                        <ArrowLeft className="h-4 w-4" /> Back to Journal
+                    </Link>
+                </Button>
 
-                {/* Header */}
-                <header className="mb-12">
-                    <div className="flex items-center gap-4 text-sm font-medium text-[#63C14B] mb-6">
-                        <span className="flex items-center gap-1.5 bg-[#63C14B]/10 px-3 py-1 rounded-full">
-                            <Calendar size={14} />
+                <div className="space-y-6 mb-10">
+                    <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="rounded-full">News</Badge>
+                        <span className="text-sm text-muted-foreground flex items-center gap-1">
                             {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Draft'}
-                        </span>
-                        <span className="flex items-center gap-1.5 text-neutral-400">
-                            <Clock size={14} />
-                            5 Min Read
                         </span>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 leading-[1.1] mb-8">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground text-balance">
                         {post.title}
                     </h1>
 
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center font-bold text-neutral-500">
-                            {post.author ? post.author[0] : 'Y'}
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <Avatar>
+                                <AvatarImage src="" />
+                                <AvatarFallback>{post.author ? post.author[0] : 'Y'}</AvatarFallback>
+                            </Avatar>
+                            <div className="text-sm">
+                                <p className="font-medium leading-none">{post.author || 'Yosh Team'}</p>
+                                <p className="text-muted-foreground">Editor</p>
+                            </div>
                         </div>
-                        <div className="text-sm">
-                            <p className="font-bold text-neutral-900">{post.author || 'Yosh Team'}</p>
-                            <p className="text-neutral-500">Editor</p>
+                        <div className="flex items-center text-sm text-muted-foreground gap-1">
+                            <Clock className="h-4 w-4" /> 5 min read
                         </div>
                     </div>
-                </header>
+                </div>
 
-                {/* Featured Image */}
                 {post.mainImage && (
-                    <div className="w-full relative aspect-[16/9] bg-neutral-100 mb-16 rounded-2xl overflow-hidden shadow-sm">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-xl border bg-muted mb-12 shadow-sm">
                         <Image
                             src={urlFor(post.mainImage).width(1200).height(675).url()}
                             alt={post.title}
@@ -68,15 +73,13 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                     </div>
                 )}
 
-                {/* Body Content */}
-                <div className="prose prose-lg prose-neutral max-w-none
-             prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-neutral-900
-             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
-             prose-p:text-neutral-700 prose-p:leading-8
-             prose-strong:font-bold prose-strong:text-neutral-900
-             prose-a:text-[#63C14B] prose-a:font-medium hover:prose-a:text-[#4da837] prose-a:no-underline
-             prose-img:rounded-2xl prose-img:shadow-md
-             prose-blockquote:border-l-4 prose-blockquote:border-[#63C14B] prose-blockquote:bg-neutral-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-neutral-700
+                <div className="prose prose-neutral dark:prose-invert max-w-none 
+             prose-headings:scroll-m-20 prose-headings:font-semibold prose-headings:tracking-tight
+             prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
+             prose-p:leading-7 prose-p:text-muted-foreground prose-p:mb-6
+             prose-a:font-medium prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+             prose-img:rounded-xl prose-img:border
+             prose-blockquote:border-l-2 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic
           ">
                     <PortableText
                         value={post.body}
@@ -84,7 +87,7 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                             types: {
                                 image: ({ value }) => (
                                     <figure className="my-10">
-                                        <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden shadow-sm">
+                                        <div className="relative w-full aspect-video rounded-xl overflow-hidden border">
                                             <Image src={urlFor(value).url()} alt="Content Image" fill className="object-cover" />
                                         </div>
                                     </figure>
@@ -94,15 +97,12 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                     />
                 </div>
 
-                <div className="mt-20 pt-10 border-t border-neutral-100">
-                    <p className="font-bold text-neutral-900 mb-4">Share this article</p>
+                <Separator className="my-12" />
+
+                <div className="flex justify-between items-center text-sm text-muted-foreground">
+                    <p>Published in <span className="font-medium text-foreground">Sustainability</span></p>
                     <div className="flex gap-4">
-                        <button className="px-6 py-2 bg-neutral-100 rounded-full text-sm font-bold text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-colors">
-                            Twitter
-                        </button>
-                        <button className="px-6 py-2 bg-neutral-100 rounded-full text-sm font-bold text-neutral-600 hover:bg-[#0077b5] hover:text-white transition-colors">
-                            LinkedIn
-                        </button>
+                        <Button variant="ghost" size="sm">Share</Button>
                     </div>
                 </div>
 
