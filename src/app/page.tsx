@@ -10,6 +10,7 @@ import { Products } from "@/components/home/Products";
 import { Testimonials } from "@/components/home/Testimonials";
 import { Gallery } from "@/components/home/Gallery";
 import { Team } from "@/components/home/Team";
+import { BlogPreview } from "@/components/home/BlogPreview";
 
 export default function Home() {
     return (
@@ -26,6 +27,7 @@ export default function Home() {
             <Testimonials />
             <SponsorCta />
             <Team />
+            <BlogPreview />
         </main>
     );
 }
