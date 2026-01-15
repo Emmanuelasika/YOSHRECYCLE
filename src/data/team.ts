@@ -2,9 +2,9 @@ export const teamData = [
     {
         id: "yewande-sobowale",
         name: "Yewande Sobowale",
-        role: "MD/CEO",
+        role: "Founder/CEO",
         img: "/assets/images/team-1.jpg",
-        bio: "Yewande is a visionary environmental entrepreneur with over a decade of experience in sustainable waste management. Her passion for a cleaner Lagos drives Yosh Recycle's innovative 'community-first' approach.",
+        bio: "Yewande is a visionary environmental entrepreneur with over a decade of experience in sustainable waste management. Her passion for a cleaner Abuja drives Yosh Recycle's innovative 'community-first' approach.",
         linkedin: "#",
         twitter: "#",
         instagram: "https://www.instagram.com/yewigreyblake?igsh=MWN1M2hwaWt4a2EwdA=="

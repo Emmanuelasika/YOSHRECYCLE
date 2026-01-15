@@ -35,7 +35,7 @@ const faqs: FAQItem[] = [
     {
         category: "About Us",
         question: "Where are your operations located?",
-        answer: "Our headquarters and main processing hub are in Abuja, but we have collection partners and logistics teams operating across key areas of Lagos and other states."
+        answer: "Our headquarters and main processing hub are in Abuja, but we have collection partners and logistics teams operating across key areas of Abuja and other states."
     },
     {
         category: "Partnership",

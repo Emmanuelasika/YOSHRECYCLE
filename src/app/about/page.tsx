@@ -36,7 +36,7 @@ export default function AboutPage() {
                             Yosh Recycle is an indigenous waste recovery and recycling enterprise committed to environmental sustainability and social impact in Nigeria.
                         </p>
                         <p className="text-neutral-500 leading-relaxed">
-                            Founded with a vision to tackle the plastic waste crisis in Lagos, we have grown into a community-powered movement. We bridge the gap between household waste and industrial raw materials, creating value at every step of the chain.
+                            Founded with a vision to tackle the plastic waste crisis in Abuja, we have grown into a community-powered movement. We bridge the gap between household waste and industrial raw materials, creating value at every step of the chain.
                         </p>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ export default function AboutPage() {
                                 The Urban <br /> <span className="text-red-500">Waste Crisis</span>
                             </h2>
                             <p className="text-xl text-neutral-600 leading-relaxed max-w-xl">
-                                Lagos generates over <span className="font-bold text-black bg-yellow-100 px-1">13,000 tonnes</span> of waste daily. Much of this ends up clogging our waterways, polluting our streets, and endangering public health.
+                                Abuja generates over <span className="font-bold text-black bg-yellow-100 px-1">13,000 tonnes</span> of waste daily. Much of this ends up clogging our waterways, polluting our streets, and endangering public health.
                             </p>
                         </div>
 

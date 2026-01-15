@@ -1,26 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Droplets, Minimize2, CircleDot } from "lucide-react"; // Changed icons for better semantic match if possible, sticking to lucide
+import Image from "next/image";
 
 const guides = [
     {
         num: "01",
         action: "Drain",
         desc: "Empty all liquid contents. Clean bottles ensure 100% recyclability and prevent contamination.",
-        color: "bg-blue-500"
+        color: "bg-blue-500",
+        img: "/assets/images/recycle_drain_black.png"
     },
     {
         num: "02",
         action: "Squash",
         desc: "Crush the bottle flat. This saves 3x the space in your bin and our collection trucks.",
-        color: "bg-orange-500"
+        color: "bg-orange-500",
+        img: "/assets/images/recycle_squash_black.png"
     },
     {
         num: "03",
         action: "Cap On",
         desc: "Put the cap back on after squashing. We recycle both the bottle (PET) and the cap (HDPE).",
-        color: "bg-[#63C14B]"
+        color: "bg-[#63C14B]",
+        img: "/assets/images/recycle_cap_black.png"
     },
 ];
 
@@ -60,29 +63,40 @@ export function RecycleGuide() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: i * 0.1 }}
-                            className="group relative bg-white p-10 h-[500px] flex flex-col justify-between border border-black/5 hover:border-black/20 transition-all duration-500"
+                            className="group relative bg-white border border-black/5 hover:border-black/20 transition-all duration-500 overflow-hidden flex flex-col h-[600px]"
                         >
-                            {/* Step Number */}
-                            <div className="flex justify-between items-start">
-                                <span className="text-8xl font-bold text-neutral-100 group-hover:text-black/5 transition-colors font-mono">
-                                    {item.num}
-                                </span>
-                                <div className={`w-3 h-3 rounded-full ${item.color}`} />
+                            {/* Image Section */}
+                            <div className="relative h-[300px] w-full overflow-hidden">
+                                <Image
+                                    src={item.img}
+                                    alt={item.action}
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
                             </div>
 
-                            {/* Content */}
-                            <div>
-                                <h3 className="text-4xl font-bold uppercase mb-6 group-hover:translate-x-2 transition-transform duration-300">
-                                    {item.action}
-                                </h3>
-                                <p className="text-lg text-neutral-500 leading-relaxed border-l-2 border-transparent group-hover:border-[#63C14B] pl-0 group-hover:pl-4 transition-all duration-300">
-                                    {item.desc}
-                                </p>
-                            </div>
+                            {/* Content Section */}
+                            <div className="p-8 flex flex-col justify-between flex-1 relative bg-white z-10">
+                                <div>
+                                    <div className="flex justify-between items-start mb-6">
+                                        <span className="text-6xl font-bold text-neutral-200 group-hover:text-black/5 transition-colors font-mono">
+                                            {item.num}
+                                        </span>
+                                        <div className={`w-3 h-3 rounded-full ${item.color}`} />
+                                    </div>
 
-                            {/* Decorative Corner */}
-                            <div className="absolute bottom-0 right-0 w-16 h-16 bg-[#F5F5F7] rounded-tl-3xl z-10" />
-                            <div className="absolute bottom-0 right-0 w-8 h-8 bg-white z-20" />
+                                    <h3 className="text-4xl font-bold uppercase mb-4 group-hover:translate-x-2 transition-transform duration-300">
+                                        {item.action}
+                                    </h3>
+                                    <p className="text-lg text-neutral-500 leading-relaxed border-l-2 border-transparent group-hover:border-[#63C14B] pl-0 group-hover:pl-4 transition-all duration-300">
+                                        {item.desc}
+                                    </p>
+                                </div>
+
+                                {/* Decorative Corner inside content */}
+                                <div className="absolute bottom-0 right-0 w-12 h-12 bg-[#F5F5F7] rounded-tl-2xl" />
+                            </div>
                         </motion.div>
                     ))}
                 </div>

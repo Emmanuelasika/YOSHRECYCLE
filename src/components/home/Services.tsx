@@ -7,7 +7,7 @@ const services = [
     {
         title: "Household Collection",
         description: "Doorstep pickup for homes. We provide the bags, you fill them. Simple, free, and impactful.",
-        image: "/assets/images/service_household.png",
+        image: "/assets/images/service_household_white_logo.png",
         tag: "Residential"
     },
     {

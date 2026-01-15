@@ -23,7 +23,7 @@ export function Mission() {
                             transition={{ duration: 0.8, ease: "easeOut" }}
                             className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight"
                         >
-                            To rid the world of plastic waste, one country at a time. We believe waste is a <span className="text-[#63C14B]">design flaw</span>, not an inevitability.
+                            To rid the world of plastic waste, one state at a time. We believe waste is a <span className="text-[#63C14B]">design flaw</span>, not an inevitability.
                         </motion.p>
 
                         <motion.div

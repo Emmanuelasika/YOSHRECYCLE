@@ -28,7 +28,7 @@ export function WhyItMatters() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-2xl md:text-3xl font-light text-neutral-600 max-w-xl text-right md:text-right"
                     >
-                        Lagos produces over <span className="text-black font-medium">13,000 tonnes</span> of waste daily. We are the defense line.
+                        Abuja produces over <span className="text-black font-medium">13,000 tonnes</span> of waste daily. We are the defense line.
                     </motion.p>
                 </div>
 
