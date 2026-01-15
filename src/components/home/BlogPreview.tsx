@@ -3,105 +3,121 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 import { RECENT_POSTS_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { motion } from "framer-motion";
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export function BlogPreview() {
     const [posts, setPosts] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        client.fetch(RECENT_POSTS_QUERY).then((data) => {
-            setPosts(data);
-            setLoading(false);
-        });
+        client.fetch(RECENT_POSTS_QUERY).then((data) => setPosts(data));
     }, []);
 
-    // Show empty state or nothing if really no posts and not loading
-    const displayPosts = posts.length > 0 ? posts : [];
-
-    if (!loading && displayPosts.length === 0) return null;
+    // Placeholder data matching Yosh Brand
+    const displayPosts = posts.length > 0 ? posts : [
+        { _id: '1', title: 'The Future of Waste is Circular', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'How we are redesigning the economy.' },
+        { _id: '2', title: 'Community Impact Report 2026', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'See the numbers behind the movement.' },
+        { _id: '3', title: 'Zero Waste Living Guide', publishedAt: new Date().toISOString(), slug: { current: '#' }, excerpt: 'Practical steps for every household.' }
+    ];
 
     return (
-        <section className="py-24 bg-neutral-50 border-t">
-            <div className="container px-4 md:px-6 mx-auto max-w-6xl">
-                <div className="flex justify-between items-center mb-12">
-                    <div>
-                        <h2 className="text-3xl font-bold tracking-tight mb-2">Latest Updates</h2>
-                        <p className="text-muted-foreground w-full md:w-2/3">
-                            Insights and news from our journey to zero waste.
-                        </p>
-                    </div>
-                    <Link href="/blog" className="hidden md:block">
-                        <Button variant="outline">View All Posts</Button>
-                    </Link>
+        <section className="py-32 px-6 bg-white border-t border-black/5">
+            <div className="max-w-[1800px] mx-auto">
+
+                {/* Header matching Services.tsx */}
+                <div className="flex flex-col md:flex-row justify-between items-end mb-20 px-4">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none"
+                    >
+                        Latest <br />
+                        <span className="text-[#63C14B]">Intelligence</span>
+                    </motion.h2>
+
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        <Link href="/blog">
+                            <Button size="lg" className="hidden md:inline-flex bg-black text-white hover:bg-[#63C14B] hover:text-black">
+                                View Journal <ArrowUpRight className="ml-2 h-4 w-4" />
+                            </Button>
+                        </Link>
+                    </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {loading ? (
-                        // Loading Skeletons
-                        Array(3).fill(0).map((_, i) => (
-                            <Card key={i} className="overflow-hidden border-none shadow-none bg-transparent">
-                                <Skeleton className="h-48 w-full rounded-xl mb-4" />
-                                <Skeleton className="h-4 w-1/4 mb-2" />
-                                <Skeleton className="h-6 w-3/4 mb-2" />
-                            </Card>
-                        ))
-                    ) : (
-                        displayPosts.map((post) => (
-                            <Link href={`/blog/${post.slug.current}`} key={post._id} className="group">
-                                <Card className="overflow-hidden h-full border-none shadow-none bg-transparent hover:bg-white transition-colors duration-200 p-0">
-                                    <div className="relative aspect-video rounded-xl overflow-hidden mb-4 border bg-neutral-100">
+                {/* Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {displayPosts.map((post, index) => (
+                        <motion.div
+                            key={post._id}
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                        >
+                            <Link href={`/blog/${post.slug.current}`} className="group h-full block">
+                                <Card className="h-full border border-black/5 bg-neutral-50 hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col rounded-[2rem]">
+                                    <div className="aspect-[4/3] relative overflow-hidden bg-neutral-200">
                                         {post.mainImage ? (
                                             <Image
-                                                src={urlFor(post.mainImage).width(600).height(400).url()}
+                                                src={urlFor(post.mainImage).width(800).height(600).url()}
                                                 alt={post.title}
                                                 fill
-                                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                                className="object-cover transition-transform duration-700 group-hover:scale-105"
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center bg-muted text-muted-foreground">
-                                                No Image
+                                            <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-100 text-neutral-300">
+                                                <div className="w-16 h-16 rounded-full border-2 border-dashed border-neutral-300" />
                                             </div>
                                         )}
-                                    </div>
-                                    <CardContent className="p-0">
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <Badge variant="secondary" className="rounded-full font-normal">
-                                                News
+
+                                        <div className="absolute top-6 left-6">
+                                            <Badge variant="secondary" className="bg-white/90 backdrop-blur text-black border-transparent shadow-sm">
+                                                Article
                                             </Badge>
-                                            <span className="text-xs text-muted-foreground flex items-center gap-1">
-                                                <Calendar className="h-3 w-3" />
-                                                {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Recent'}
-                                            </span>
                                         </div>
-                                        <h3 className="font-bold text-xl leading-tight mb-2 group-hover:text-[#63C14B] transition-colors">
+                                    </div>
+
+                                    <CardContent className="p-8 flex flex-col flex-1">
+                                        <div className="flex items-center justify-between mb-6">
+                                            <span className="text-xs font-bold uppercase tracking-widest text-[#63C14B]">
+                                                {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Just Now'}
+                                            </span>
+                                            <div className="w-8 h-8 rounded-full bg-white border border-black/5 flex items-center justify-center group-hover:bg-[#63C14B] group-hover:text-white transition-colors">
+                                                <ArrowUpRight size={14} />
+                                            </div>
+                                        </div>
+
+                                        <h3 className="text-3xl font-bold uppercase leading-none tracking-tight mb-4 group-hover:text-[#63C14B] transition-colors">
                                             {post.title}
                                         </h3>
-                                        <p className="text-muted-foreground text-sm line-clamp-2">
-                                            {post.excerpt}
-                                        </p>
+
+                                        {post.excerpt && (
+                                            <p className="text-neutral-500 text-sm leading-relaxed line-clamp-2 mt-auto">
+                                                {post.excerpt}
+                                            </p>
+                                        )}
                                     </CardContent>
-                                    <CardFooter className="p-0 mt-4">
-                                        <div className="text-sm font-semibold flex items-center gap-1 text-[#63C14B]">
-                                            Read Article <ArrowRight className="h-4 w-4" />
-                                        </div>
-                                    </CardFooter>
                                 </Card>
                             </Link>
-                        ))
-                    )}
+                        </motion.div>
+                    ))}
                 </div>
-                <div className="mt-8 md:hidden">
+
+                <div className="mt-12 md:hidden w-full">
                     <Link href="/blog" className="block w-full">
-                        <Button className="w-full" variant="outline">View All Posts</Button>
+                        <Button size="lg" className="w-full bg-black text-white">View Journal</Button>
                     </Link>
                 </div>
             </div>

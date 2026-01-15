@@ -5,7 +5,7 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -23,48 +23,48 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
     }
 
     return (
-        <article className="min-h-screen bg-background pt-32 pb-24">
-            <div className="container px-4 md:px-6 mx-auto max-w-3xl">
+        <article className="min-h-screen bg-white pt-40 pb-32">
+            {/* Max Width Container */}
+            <div className="max-w-[1200px] mx-auto px-6">
 
-                <Button variant="ghost" asChild className="mb-8 pl-0 hover:pl-0 hover:bg-transparent text-muted-foreground hover:text-foreground">
-                    <Link href="/blog" className="gap-2">
-                        <ArrowLeft className="h-4 w-4" /> Back to Journal
+                <div className="mb-12">
+                    <Link href="/blog">
+                        <Button variant="outline" className="pl-6 group border-black/10 hover:border-black">
+                            <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Back to Archive
+                        </Button>
                     </Link>
-                </Button>
+                </div>
 
-                <div className="space-y-6 mb-10">
-                    <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="rounded-full">News</Badge>
-                        <span className="text-sm text-muted-foreground flex items-center gap-1">
+                {/* Editorial Header */}
+                <header className="mb-16 text-center max-w-4xl mx-auto">
+                    <div className="flex items-center justify-center gap-3 mb-8">
+                        <Badge variant="secondary" className="bg-[#63C14B]/10 text-[#63C14B] hover:bg-[#63C14B]/20 border-transparent">News</Badge>
+                        <span className="text-xs font-bold uppercase tracking-widest text-neutral-400">
                             {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : 'Draft'}
                         </span>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground text-balance">
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase leading-[0.9] tracking-tighter mb-12 text-balance">
                         {post.title}
                     </h1>
 
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <Avatar>
-                                <AvatarImage src="" />
-                                <AvatarFallback>{post.author ? post.author[0] : 'Y'}</AvatarFallback>
-                            </Avatar>
-                            <div className="text-sm">
-                                <p className="font-medium leading-none">{post.author || 'Yosh Team'}</p>
-                                <p className="text-muted-foreground">Editor</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center text-sm text-muted-foreground gap-1">
-                            <Clock className="h-4 w-4" /> 5 min read
+                    <div className="flex items-center justify-center gap-4">
+                        <Avatar className="h-12 w-12 border border-black/5">
+                            <AvatarImage src="" />
+                            <AvatarFallback className="bg-[#63C14B] text-white font-bold">Y</AvatarFallback>
+                        </Avatar>
+                        <div className="text-left">
+                            <p className="text-sm font-bold uppercase tracking-wide">{post.author || 'Yosh Team'}</p>
+                            <p className="text-xs text-neutral-500 uppercase tracking-widest">Editorial Staff</p>
                         </div>
                     </div>
-                </div>
+                </header>
 
+                {/* Hero Image */}
                 {post.mainImage && (
-                    <div className="relative aspect-video w-full overflow-hidden rounded-xl border bg-muted mb-12 shadow-sm">
+                    <div className="relative w-full aspect-[21/9] rounded-[2rem] overflow-hidden bg-neutral-100 mb-20 shadow-sm border border-black/5">
                         <Image
-                            src={urlFor(post.mainImage).width(1200).height(675).url()}
+                            src={urlFor(post.mainImage).width(1920).height(1080).url()}
                             alt={post.title}
                             fill
                             className="object-cover"
@@ -73,52 +73,50 @@ export default async function PostPage(props: { params: Promise<{ slug: string }
                     </div>
                 )}
 
-                <div className="prose prose-neutral dark:prose-invert max-w-none 
-             prose-headings:scroll-m-20 prose-headings:font-semibold prose-headings:tracking-tight
-             prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
-             prose-p:leading-7 prose-p:text-muted-foreground prose-p:mb-6
-             prose-a:font-medium prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-             prose-img:rounded-xl prose-img:border
-             prose-blockquote:border-l-2 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic
-          ">
-                    <PortableText
-                        value={post.body}
-                        components={{
-                            block: {
-                                h1: ({ children }) => <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 mt-12">{children}</h1>,
-                                h2: ({ children }) => <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-4 mt-10">{children}</h2>,
-                                h3: ({ children }) => <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mb-4 mt-8">{children}</h3>,
-                                h4: ({ children }) => <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mb-4 mt-8">{children}</h4>,
-                                normal: ({ children }) => <p className="leading-7 [&:not(:first-child)]:mt-6 text-muted-foreground">{children}</p>,
-                                blockquote: ({ children }) => (
-                                    <blockquote className="mt-6 border-l-2 border-primary pl-6 italic text-muted-foreground">
-                                        {children}
-                                    </blockquote>
-                                ),
-                            },
-                            list: {
-                                bullet: ({ children }) => <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-muted-foreground">{children}</ul>,
-                                number: ({ children }) => <ol className="my-6 ml-6 list-decimal [&>li]:mt-2 text-muted-foreground">{children}</ol>,
-                            },
-                            types: {
-                                image: ({ value }) => (
-                                    <figure className="my-10">
-                                        <div className="relative w-full aspect-video rounded-xl overflow-hidden border">
-                                            <Image src={urlFor(value).url()} alt="Content Image" fill className="object-cover" />
-                                        </div>
-                                    </figure>
-                                )
-                            }
-                        }}
-                    />
-                </div>
+                {/* Content */}
+                <div className="max-w-3xl mx-auto">
+                    <div className="prose prose-lg md:prose-xl prose-neutral max-w-none 
+                prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tight prose-headings:text-black
+                prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
+                prose-p:text-neutral-600 prose-p:leading-relaxed prose-p:font-medium
+                prose-a:text-[#63C14B] prose-a:no-underline hover:prose-a:underline
+                prose-blockquote:border-l-4 prose-blockquote:border-[#63C14B] prose-blockquote:pl-8 prose-blockquote:py-4 prose-blockquote:bg-neutral-50 prose-blockquote:rounded-r-2xl prose-blockquote:italic
+                prose-img:rounded-2xl prose-img:shadow-lg prose-img:border prose-img:border-black/5
+             ">
+                        <PortableText
+                            value={post.body}
+                            components={{
+                                block: {
+                                    h2: ({ children }) => <h2 className="mt-16 mb-8 text-4xl font-bold uppercase tracking-tighter leading-none">{children}</h2>,
+                                    h3: ({ children }) => <h3 className="mt-12 mb-6 text-2xl font-bold uppercase tracking-tight">{children}</h3>,
+                                    normal: ({ children }) => <p className="mb-8 text-lg md:text-xl text-neutral-600 leading-relaxed font-light">{children}</p>,
+                                },
+                                types: {
+                                    image: ({ value }) => (
+                                        <figure className="my-16">
+                                            <div className="relative w-full aspect-[3/2] rounded-[2rem] overflow-hidden border border-black/5 bg-neutral-100">
+                                                <Image src={urlFor(value).url()} alt="Content Image" fill className="object-cover" />
+                                            </div>
+                                        </figure>
+                                    )
+                                }
+                            }}
+                        />
+                    </div>
 
-                <Separator className="my-12" />
+                    <Separator className="my-20" />
 
-                <div className="flex justify-between items-center text-sm text-muted-foreground">
-                    <p>Published in <span className="font-medium text-foreground">Sustainability</span></p>
-                    <div className="flex gap-4">
-                        <Button variant="ghost" size="sm">Share</Button>
+                    {/* Footer area */}
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-8 p-12 bg-neutral-50 rounded-[2rem] border border-black/5">
+                        <div>
+                            <h3 className="text-2xl font-bold uppercase tracking-tight mb-2">Share this story</h3>
+                            <p className="text-neutral-500">Help us spread the word about sustainable living.</p>
+                        </div>
+                        <div className="flex gap-4">
+                            <Button variant="outline" className="rounded-full">Twitter</Button>
+                            <Button variant="outline" className="rounded-full">LinkedIn</Button>
+                            <Button variant="outline" className="rounded-full">Facebook</Button>
+                        </div>
                     </div>
                 </div>
 
