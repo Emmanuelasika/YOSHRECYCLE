@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Navigation } from "@/components/ui/Navigation";
-import { Footer } from "@/components/ui/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,9 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn(inter.variable, "antialiased selection:bg-[#63C14B] selection:text-white bg-white text-black")}>
-        <Navigation />
         {children}
-        <Footer />
         <Toaster position="top-center" />
       </body>
     </html>
