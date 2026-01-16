@@ -1,4 +1,3 @@
 import { builder } from "@builder.io/sdk";
-
-// Initialize Builder with your public API key
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+const API_KEY = process.env.NEXT_PUBLIC_BUILDER_API_KEY || "demo"; // Fallback to 'demo' to prevent build crash
+builder.init(API_KEY);
