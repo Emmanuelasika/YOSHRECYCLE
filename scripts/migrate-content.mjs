@@ -107,7 +107,8 @@ async function migrate() {
         const prod2ImgId = await uploadProductImage('cold-washed.png');
         const prod3ImgId = await uploadProductImage('bales.png');
 
-        const heroVideoId = await uploadFile('video-2.mp4', 'file');
+        // const heroVideoId = await uploadFile('video-2.mp4', 'file');
+        const heroVideoId = undefined; // Skipping video for now as it hangs
 
         const galleryImages = [
             'gallery-1.jpg', 'gallery-2.jpg', 'gallery-3.jpg', 'gallery-4.jpg',
@@ -122,7 +123,9 @@ async function migrate() {
         await client.createOrReplace({
             _id: 'homepage',
             _type: 'homepage',
-            heroTitle: 'Community Powered Recycling',
+            heroTitlePart1: 'Community',
+            heroTitleHighlight: 'Powered',
+            heroTitlePart2: 'Recycling',
             heroSubtitle: 'We are a community powered plastic recycling initiative. We collect at source, reduce waste, and protect the planet.',
             heroVideo: heroVideoId ? { _type: 'file', asset: { _ref: heroVideoId } } : undefined,
             heroPrimaryButtonLabel: 'Our Mission',
@@ -135,7 +138,8 @@ async function migrate() {
             missionStat2Value: 'Zero Cost',
             missionStat2Label: 'Free collection for households and businesses.',
 
-            whyTitle: 'Why It Matters',
+            whyTitlePrefix: 'Why It',
+            whyTitleHighlight: 'Matters',
             whySubtitle: 'Abuja produces over 13,000 tonnes of waste daily. We are the defense line.',
             whyList: [
                 {
@@ -166,7 +170,8 @@ async function migrate() {
                 { _key: 'stat3', val: '80+', label: 'Partner Schools' },
             ],
 
-            processTitle: 'The Process',
+            processTitlePrefix: 'The',
+            processTitleHighlight: 'Process',
             processDescription: 'A transparent, verified workflow that turns community waste into global value.',
             processSteps: [
                 {
@@ -225,7 +230,8 @@ async function migrate() {
                 }
             ],
 
-            guideTitle: 'How To Prepare',
+            guideTitlePrefix: 'How To',
+            guideTitleHighlight: 'Prepare',
             guideSubtitle: '3 simple steps to ensure your plastic waste is ready for a new life.',
             guideSteps: [
                 {
@@ -254,7 +260,8 @@ async function migrate() {
                 }
             ],
 
-            productsTitle: 'Our Products',
+            productsTitlePrefix: 'Our',
+            productsTitleHighlight: 'Products',
             productsDescription: 'We supply the manufacturing industry with high-quality recycled raw materials.',
             productsList: [
                 {
@@ -280,7 +287,8 @@ async function migrate() {
                 },
             ],
 
-            galleryTitle: 'Work in Action.',
+            galleryTitlePrefix: 'Work in',
+            galleryTitleHighlight: 'Action',
             galleryImages: galleryImageIds.map(id => ({ _key: id, _type: 'image', asset: { _ref: id } })),
             testimonialsTitle: 'What our communities say about Yosh Recycle',
             testimonialsList: [
@@ -297,7 +305,9 @@ async function migrate() {
                     role: 'Corporate Partner'
                 }
             ],
-            sponsorTitle: 'Sponsor A Brand Bag Campaign',
+            sponsorTitlePart1: 'Sponsor A',
+            sponsorTitleHighlight: 'Brand Bag',
+            sponsorTitlePart2: 'Campaign',
             sponsorBadgeValue: '50kg+',
             sponsorBadgeLabel: 'Plastic Capacity',
             teamTitle: 'The Team',

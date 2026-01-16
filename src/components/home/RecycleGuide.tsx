@@ -12,13 +12,15 @@ interface GuideItem {
 }
 
 interface RecycleGuideProps {
-    title?: string;
+    titlePrefix?: string;
+    titleHighlight?: string;
     subtitle?: string;
     guidesList?: GuideItem[];
 }
 
 export function RecycleGuide({
-    title = "How To <br /> <span class='text-[#63C14B]'>Prepare</span>",
+    titlePrefix = "How To",
+    titleHighlight = "Prepare",
     subtitle = "3 simple steps to ensure your plastic waste is ready for a new life.",
     guidesList = [
         {
@@ -54,7 +56,9 @@ export function RecycleGuide({
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9]" dangerouslySetInnerHTML={{ __html: title }}>
+                        <h2 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9]">
+                            {titlePrefix} <br />
+                            <span className="text-[#63C14B]">{titleHighlight}</span>
                         </h2>
                     </motion.div>
 

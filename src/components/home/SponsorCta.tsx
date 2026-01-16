@@ -5,7 +5,9 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 interface SponsorCtaProps {
-    title?: string;
+    titlePart1?: string;
+    titleHighlight?: string;
+    titlePart2?: string;
     description?: string;
     badgeValue?: string;
     badgeLabel?: string;
@@ -17,7 +19,9 @@ interface SponsorCtaProps {
 }
 
 export function SponsorCta({
-    title = "Sponsor A <br /> <span class='text-[#63C14B]'>Brand Bag</span> <br /> Campaign",
+    titlePart1 = "Sponsor A",
+    titleHighlight = "Brand Bag",
+    titlePart2 = "Campaign",
     description = "<strong>Make a visible impact.</strong><br /> Your sponsorship provides branded collection bags to households and schools, directly removing plastic from the environment while promoting your commitment to sustainability.",
     badgeValue = "50kg+",
     badgeLabel = "Plastic Capacity",
@@ -71,7 +75,10 @@ export function SponsorCta({
                             CORPORATE SOCIAL RESPONSIBILITY
                         </span>
 
-                        <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase mb-6 leading-[0.9]" dangerouslySetInnerHTML={{ __html: title }}>
+                        <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase mb-6 leading-[0.9]">
+                            {titlePart1} <br />
+                            <span className="text-[#63C14B]">{titleHighlight}</span> <br />
+                            {titlePart2}
                         </h2>
 
                         <p className="text-lg text-neutral-400 max-w-lg mb-10 leading-relaxed" dangerouslySetInnerHTML={{ __html: description }}>

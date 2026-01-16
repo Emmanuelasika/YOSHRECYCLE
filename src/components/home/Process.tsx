@@ -19,13 +19,15 @@ interface StepItem {
 }
 
 interface ProcessProps {
-    title?: string;
+    titlePrefix?: string;
+    titleHighlight?: string;
     description?: string;
     stepsList?: StepItem[];
 }
 
 export function Process({
-    title = "The <br /> <span class='text-[#63C14B]'>Process</span>",
+    titlePrefix = "The",
+    titleHighlight = "Process",
     description = "A transparent, verified workflow that turns community waste into global value. Zero landfills, 100% impact.",
     stepsList = [
         {
@@ -71,7 +73,9 @@ export function Process({
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9] mb-8" dangerouslySetInnerHTML={{ __html: title }}>
+                        <h2 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9] mb-8">
+                            {titlePrefix} <br />
+                            <span className="text-[#63C14B]">{titleHighlight}</span>
                         </h2>
                         <p className="text-xl text-neutral-600 max-w-sm leading-relaxed">
                             {description}

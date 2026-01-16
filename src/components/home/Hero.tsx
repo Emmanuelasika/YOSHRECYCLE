@@ -5,7 +5,9 @@ import { useRef } from "react";
 import { ArrowDown } from "lucide-react";
 
 interface HeroProps {
-    title?: string;
+    titlePart1?: string;
+    titleHighlight?: string;
+    titlePart2?: string;
     subtitle?: string;
     videoUrl?: string;
     ctaPrimaryLabel?: string;
@@ -15,7 +17,9 @@ interface HeroProps {
 }
 
 export function Hero({
-    title = "Community Powered Recycling",
+    titlePart1 = "Community",
+    titleHighlight = "Powered",
+    titlePart2 = "Recycling",
     subtitle = "We are a community powered plastic recycling initiative. We collect at source, reduce waste, and protect the planet.",
     videoUrl = "/assets/videos/video-2.mp4",
     ctaPrimaryLabel = "Our Mission",
@@ -32,18 +36,15 @@ export function Hero({
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-    // Parse title for line breaks if it's the default one or just render string
+    // Render title with split parts
     const renderTitle = () => {
-        if (title === "Community Powered Recycling") {
-            return (
-                <>
-                    Community <br />
-                    <span className="text-[#63C14B]">Powered</span> <br />
-                    Recycling
-                </>
-            )
-        }
-        return <div dangerouslySetInnerHTML={{ __html: title.replace(/\n/g, "<br />") }} />
+        return (
+            <>
+                {titlePart1} <br />
+                <span className="text-[#63C14B]">{titleHighlight}</span> <br />
+                {titlePart2}
+            </>
+        )
     };
 
     return (

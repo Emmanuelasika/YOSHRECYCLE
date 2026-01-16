@@ -13,7 +13,9 @@ import { Team } from "@/components/home/Team";
 import { BlogPreview } from "@/components/home/BlogPreview";
 
 interface HomepageData {
-    heroTitle?: string;
+    heroTitlePart1?: string;
+    heroTitleHighlight?: string;
+    heroTitlePart2?: string;
     heroSubtitle?: string;
     heroVideoUrl?: string;
     heroPrimaryButtonLabel?: string;
@@ -25,29 +27,36 @@ interface HomepageData {
     missionStat1Label?: string;
     missionStat2Value?: string;
     missionStat2Label?: string;
-    whyTitle?: string;
+    whyTitlePrefix?: string;
+    whyTitleHighlight?: string;
     whySubtitle?: string;
     whyList?: { title: string; desc: string; img: string }[];
     impactTitle?: string;
     impactSubtitle?: string;
     impactStats?: { val: string; label: string }[];
-    processTitle?: string;
+    processTitlePrefix?: string;
+    processTitleHighlight?: string;
     processDescription?: string;
     processSteps?: { id: string; title: string; desc: string; icon: string }[];
     servicesTitle?: string;
     servicesDescription?: string;
     servicesList?: { title: string; description: string; image: string; tag: string }[];
-    guideTitle?: string;
+    guideTitlePrefix?: string;
+    guideTitleHighlight?: string;
     guideSubtitle?: string;
     guideSteps?: { num: string; action: string; desc: string; color: string; img: string }[];
-    productsTitle?: string;
+    productsTitlePrefix?: string;
+    productsTitleHighlight?: string;
     productsDescription?: string;
     productsList?: { title: string; subtitle: string; desc: string; img: string }[];
-    galleryTitle?: string;
+    galleryTitlePrefix?: string;
+    galleryTitleHighlight?: string;
     galleryImages?: string[];
     testimonialsTitle?: string;
     testimonialsList?: { quote: string; author: string; role: string }[];
-    sponsorTitle?: string;
+    sponsorTitlePart1?: string;
+    sponsorTitleHighlight?: string;
+    sponsorTitlePart2?: string;
     sponsorDescription?: string;
     sponsorBadgeValue?: string;
     sponsorBadgeLabel?: string;
@@ -64,7 +73,9 @@ export function HomeDefault({ data }: HomeDefaultProps) {
     return (
         <main className="min-h-screen bg-white">
             <Hero
-                title={data?.heroTitle}
+                titlePart1={data?.heroTitlePart1}
+                titleHighlight={data?.heroTitleHighlight}
+                titlePart2={data?.heroTitlePart2}
                 subtitle={data?.heroSubtitle}
                 videoUrl={data?.heroVideoUrl}
                 ctaPrimaryLabel={data?.heroPrimaryButtonLabel}
@@ -80,7 +91,8 @@ export function HomeDefault({ data }: HomeDefaultProps) {
                 stat2Label={data?.missionStat2Label}
             />
             <WhyItMatters
-                title={data?.whyTitle ?? undefined}
+                titlePrefix={data?.whyTitlePrefix ?? undefined}
+                titleHighlight={data?.whyTitleHighlight ?? undefined}
                 subtitle={data?.whySubtitle ?? undefined}
                 reasonsList={data?.whyList ?? undefined}
             />
@@ -90,7 +102,8 @@ export function HomeDefault({ data }: HomeDefaultProps) {
                 stats={data?.impactStats ?? undefined}
             />
             <Gallery
-                title={data?.galleryTitle ?? undefined}
+                titlePrefix={data?.galleryTitlePrefix ?? undefined}
+                titleHighlight={data?.galleryTitleHighlight ?? undefined}
                 images={data?.galleryImages ?? undefined}
             />
             <Services
@@ -99,17 +112,20 @@ export function HomeDefault({ data }: HomeDefaultProps) {
                 servicesList={data?.servicesList ?? undefined}
             />
             <Process
-                title={data?.processTitle ?? undefined}
+                titlePrefix={data?.processTitlePrefix ?? undefined}
+                titleHighlight={data?.processTitleHighlight ?? undefined}
                 description={data?.processDescription ?? undefined}
                 stepsList={data?.processSteps ?? undefined}
             />
             <RecycleGuide
-                title={data?.guideTitle ?? undefined}
+                titlePrefix={data?.guideTitlePrefix ?? undefined}
+                titleHighlight={data?.guideTitleHighlight ?? undefined}
                 subtitle={data?.guideSubtitle ?? undefined}
                 guidesList={data?.guideSteps ?? undefined}
             />
             <Products
-                introTitle={data?.productsTitle ?? undefined}
+                introTitlePrefix={data?.productsTitlePrefix ?? undefined}
+                introTitleHighlight={data?.productsTitleHighlight ?? undefined}
                 introDesc={data?.productsDescription ?? undefined}
                 productsList={data?.productsList ?? undefined}
             />
@@ -118,7 +134,9 @@ export function HomeDefault({ data }: HomeDefaultProps) {
                 testimonialsList={data?.testimonialsList}
             />
             <SponsorCta
-                title={data?.sponsorTitle}
+                titlePart1={data?.sponsorTitlePart1}
+                titleHighlight={data?.sponsorTitleHighlight}
+                titlePart2={data?.sponsorTitlePart2}
                 description={data?.sponsorDescription}
                 badgeValue={data?.sponsorBadgeValue}
                 badgeLabel={data?.sponsorBadgeLabel}

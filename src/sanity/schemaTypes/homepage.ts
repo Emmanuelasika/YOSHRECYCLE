@@ -22,11 +22,28 @@ export const homepage = defineType({
     fields: [
         // Hero Section
         defineField({
-            name: 'heroTitle',
-            title: 'Hero Title',
+            name: 'heroTitlePart1',
+            title: 'Hero Title Part 1',
             type: 'string',
             group: 'hero',
-            initialValue: 'Community Powered Recycling',
+            initialValue: 'Community',
+            description: 'First line/part (White text)',
+        }),
+        defineField({
+            name: 'heroTitleHighlight',
+            title: 'Hero Title Highlight',
+            type: 'string',
+            group: 'hero',
+            initialValue: 'Powered',
+            description: 'Middle part (Green text)',
+        }),
+        defineField({
+            name: 'heroTitlePart2',
+            title: 'Hero Title Part 2',
+            type: 'string',
+            group: 'hero',
+            initialValue: 'Recycling',
+            description: 'Last part (White text)',
         }),
         defineField({
             name: 'heroSubtitle',
@@ -112,11 +129,18 @@ export const homepage = defineType({
 
         // Why It Matters Section
         defineField({
-            name: 'whyTitle',
-            title: 'Why It Matters Title',
+            name: 'whyTitlePrefix',
+            title: 'Why Title Prefix',
             type: 'string',
             group: 'whyItMatters',
-            initialValue: 'Why It Matters',
+            initialValue: 'Why It',
+        }),
+        defineField({
+            name: 'whyTitleHighlight',
+            title: 'Why Title Highlight',
+            type: 'string',
+            group: 'whyItMatters',
+            initialValue: 'Matters',
         }),
         defineField({
             name: 'whySubtitle',
@@ -175,11 +199,18 @@ export const homepage = defineType({
 
         // Process Section
         defineField({
-            name: 'processTitle',
-            title: 'Process Title',
+            name: 'processTitlePrefix',
+            title: 'Process Title Prefix',
             type: 'string',
             group: 'process',
-            initialValue: 'The Process',
+            initialValue: 'The',
+        }),
+        defineField({
+            name: 'processTitleHighlight',
+            title: 'Process Title Highlight',
+            type: 'string',
+            group: 'process',
+            initialValue: 'Process',
         }),
         defineField({
             name: 'processDescription',
@@ -253,11 +284,18 @@ export const homepage = defineType({
 
         // Recycle Guide Section
         defineField({
-            name: 'guideTitle',
-            title: 'Guide Title',
+            name: 'guideTitlePrefix',
+            title: 'Guide Title Prefix',
             type: 'string',
             group: 'recycleGuide',
-            initialValue: 'How To Prepare',
+            initialValue: 'How To',
+        }),
+        defineField({
+            name: 'guideTitleHighlight',
+            title: 'Guide Title Highlight',
+            type: 'string',
+            group: 'recycleGuide',
+            initialValue: 'Prepare',
         }),
         defineField({
             name: 'guideSubtitle',
@@ -287,11 +325,18 @@ export const homepage = defineType({
 
         // Products Section
         defineField({
-            name: 'productsTitle',
-            title: 'Products Title',
+            name: 'productsTitlePrefix',
+            title: 'Products Title Prefix',
             type: 'string',
             group: 'products',
-            initialValue: 'Our Products',
+            initialValue: 'Our',
+        }),
+        defineField({
+            name: 'productsTitleHighlight',
+            title: 'Products Title Highlight',
+            type: 'string',
+            group: 'products',
+            initialValue: 'Products',
         }),
         defineField({
             name: 'productsDescription',
@@ -320,11 +365,18 @@ export const homepage = defineType({
 
         // Gallery Section
         defineField({
-            name: 'galleryTitle',
-            title: 'Gallery Title',
+            name: 'galleryTitlePrefix',
+            title: 'Gallery Title Prefix',
             type: 'string',
             group: 'gallery',
-            initialValue: 'Work in Action.',
+            initialValue: 'Work in',
+        }),
+        defineField({
+            name: 'galleryTitleHighlight',
+            title: 'Gallery Title Highlight',
+            type: 'string',
+            group: 'gallery',
+            initialValue: 'Action',
         }),
         defineField({
             name: 'galleryImages',
@@ -361,11 +413,25 @@ export const homepage = defineType({
 
         // Sponsor CTA Section
         defineField({
-            name: 'sponsorTitle',
-            title: 'Sponsor CTA Title',
+            name: 'sponsorTitlePart1',
+            title: 'Sponsor CTA Title Part 1',
             type: 'string',
             group: 'sponsor',
-            initialValue: 'Sponsor A Brand Bag Campaign',
+            initialValue: 'Sponsor A',
+        }),
+        defineField({
+            name: 'sponsorTitleHighlight',
+            title: 'Sponsor CTA Title Highlight',
+            type: 'string',
+            group: 'sponsor',
+            initialValue: 'Brand Bag',
+        }),
+        defineField({
+            name: 'sponsorTitlePart2',
+            title: 'Sponsor CTA Title Part 2',
+            type: 'string',
+            group: 'sponsor',
+            initialValue: 'Campaign',
         }),
         defineField({
             name: 'sponsorDescription',

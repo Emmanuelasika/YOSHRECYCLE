@@ -45,7 +45,9 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0] {
 
 // Get homepage content
 export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
-  heroTitle,
+  heroTitlePart1,
+  heroTitleHighlight,
+  heroTitlePart2,
   heroSubtitle,
   "heroVideoUrl": heroVideo.asset->url,
   heroPrimaryButtonLabel,
@@ -57,7 +59,8 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
   missionStat1Label,
   missionStat2Value,
   missionStat2Label,
-  whyTitle,
+  whyTitlePrefix,
+  whyTitleHighlight,
   whySubtitle,
   whyList[] {
     title,
@@ -67,7 +70,8 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
   impactTitle,
   impactSubtitle,
   impactStats,
-  processTitle,
+  processTitlePrefix,
+  processTitleHighlight,
   processDescription,
   processSteps[] {
     id,
@@ -83,7 +87,8 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
     image,
     tag
   },
-  guideTitle,
+  guideTitlePrefix,
+  guideTitleHighlight,
   guideSubtitle,
   guideSteps[] {
     num,
@@ -92,7 +97,8 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
     color,
     image
   },
-  productsTitle,
+  productsTitlePrefix,
+  productsTitleHighlight,
   productsDescription,
   productsList[] {
     title,
@@ -100,11 +106,14 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
     desc,
     image
   },
-  galleryTitle,
+  galleryTitlePrefix,
+  galleryTitleHighlight,
   galleryImages,
   testimonialsTitle,
   testimonialsList,
-  sponsorTitle,
+  sponsorTitlePart1,
+  sponsorTitleHighlight,
+  sponsorTitlePart2,
   sponsorDescription,
   sponsorBadgeValue,
   sponsorBadgeLabel,

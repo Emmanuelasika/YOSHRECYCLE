@@ -10,13 +10,15 @@ interface ReasonItem {
 }
 
 interface WhyItMattersProps {
-    title?: string;
+    titlePrefix?: string;
+    titleHighlight?: string;
     subtitle?: string;
     reasonsList?: ReasonItem[];
 }
 
 export function WhyItMatters({
-    title = "Why It <br /> <span class='text-[#63C14B]'>Matters</span>",
+    titlePrefix = "Why It",
+    titleHighlight = "Matters",
     subtitle = "Abuja produces over <span class='text-black font-medium'>13,000 tonnes</span> of waste daily. We are the defense line.",
     reasonsList = [
         {
@@ -48,8 +50,9 @@ export function WhyItMatters({
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                         className="text-6xl md:text-9xl font-bold tracking-tighter uppercase leading-[0.85]"
-                        dangerouslySetInnerHTML={{ __html: title }}
                     >
+                        {titlePrefix} <br />
+                        <span className="text-[#63C14B]">{titleHighlight}</span>
                     </motion.h2>
 
                     <motion.p

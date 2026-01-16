@@ -12,13 +12,15 @@ interface ProductItem {
 }
 
 interface ProductsProps {
-    introTitle?: string;
+    introTitlePrefix?: string;
+    introTitleHighlight?: string;
     introDesc?: string;
     productsList?: ProductItem[];
 }
 
 export function Products({
-    introTitle = "Our <br /> <span class='text-[#63C14B]'>Products</span>",
+    introTitlePrefix = "Our",
+    introTitleHighlight = "Products",
     introDesc = "We supply the manufacturing industry with high-quality recycled raw materials. Scroll to see what we make.",
     productsList = [
         {
@@ -59,7 +61,9 @@ export function Products({
                     {/* Intro Card */}
                     <div className="w-screen h-screen flex-shrink-0 flex items-center justify-center px-[5vw] border-r border-black/5 bg-white relative overflow-hidden">
                         <div className="relative z-10 max-w-4xl">
-                            <h2 className="text-[8vw] font-bold leading-[0.85] tracking-tighter uppercase mb-8" dangerouslySetInnerHTML={{ __html: introTitle }}>
+                            <h2 className="text-[8vw] font-bold leading-[0.85] tracking-tighter uppercase mb-8">
+                                {introTitlePrefix} <br />
+                                <span className="text-[#63C14B]">{introTitleHighlight}</span>
                             </h2>
                             <p className="max-w-xl text-xl text-neutral-500">
                                 {introDesc}
