@@ -14,7 +14,6 @@ export default defineConfig({
         structureTool(),
         presentationTool({
             previewUrl: {
-                initial: 'http://localhost:3000',
                 previewMode: {
                     enable: '/api/draft-mode/enable',
                 },
