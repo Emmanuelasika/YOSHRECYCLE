@@ -1,35 +1,25 @@
-import { builder } from "@builder.io/sdk";
-import { RenderBuilderContent } from "@/components/builder";
+import { PlasmicComponent, PlasmicRootProvider } from "@plasmicapp/loader-nextjs";
+import { PLASMIC } from "@/plasmic-init";
 import { HomeDefault } from "@/components/home/HomeDefault";
-import "@/lib/builder"; // Ensure builder is initialized
 
-// Builder.io fetching logic
+// Use revalidate for SSG/ISR
+export const revalidate = 60;
+
 export default async function Home() {
-    let content = null;
-
-    // Only attempt to fetch if the key is real and not the placeholder
-    const apiKey = process.env.NEXT_PUBLIC_BUILDER_API_KEY;
-    const isConfigured = apiKey && apiKey !== "your_api_key_here";
-
-    if (isConfigured) {
-        try {
-            content = await builder
-                .get("page", {
-                    userAttributes: {
-                        urlPath: "/",
-                    },
-                })
-                .toPromise();
-        } catch (error) {
-            console.warn("Failed to fetch Builder.io content", error);
+    // Try to fetch "Home" page from Plasmic (mapped to "/")
+    try {
+        const plasmicData = await PLASMIC.fetchComponentData("/");
+        if (plasmicData) {
+            return (
+                <PlasmicRootProvider loader={PLASMIC} prefetchedData={plasmicData}>
+                    <PlasmicComponent component={plasmicData.entryCompMetas[0].name} />
+                </PlasmicRootProvider>
+            );
         }
+    } catch (e) {
+        // Fallback to default if not found or error (e.g. invalid token)
+        console.warn("Plasmic home fetch failed, using fallback.");
     }
 
-    return (
-        <RenderBuilderContent
-            content={content}
-            model="page"
-            fallback={<HomeDefault />}
-        />
-    );
+    return <HomeDefault />;
 }
