@@ -12,7 +12,6 @@
     "undici": "^6.23.0"
   },
   "dependencies": {
-    "@plasmicapp/loader-nextjs": "^1.0.450",
     "@portabletext/react": "^6.0.2",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-separator": "^1.1.8",
