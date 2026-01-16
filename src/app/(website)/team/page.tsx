@@ -27,7 +27,10 @@ export default async function TeamPage() {
                         {page?.heroTag || "Our People"}
                     </span>
                     <h1 className="text-[10vw] leading-[0.85] font-bold tracking-tighter uppercase mb-12">
-                        {renderMultiline(page?.heroTitle) || <>The Minds <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-800 to-neutral-400">Behind Yosh</span></>}
+                        {page?.heroTitlePrefix || "The Minds"} <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-800 to-neutral-400">
+                            {page?.heroTitleHighlight || "Behind Yosh"}
+                        </span>
                     </h1>
 
                     <div className="flex flex-col md:flex-row justify-between items-end gap-8">

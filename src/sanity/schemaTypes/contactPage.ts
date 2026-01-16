@@ -6,11 +6,16 @@ export const contactPage = defineType({
     type: 'document',
     fields: [
         defineField({
-            name: 'heroTitle',
-            title: 'Hero Title',
-            type: 'text',
-            initialValue: 'Get In \nTouch',
-            rows: 2,
+            name: 'heroTitlePrefix',
+            title: 'Hero Title Prefix',
+            type: 'string',
+            initialValue: 'Get In',
+        }),
+        defineField({
+            name: 'heroTitleHighlight',
+            title: 'Hero Title Highlight',
+            type: 'string',
+            initialValue: 'Touch',
         }),
         defineField({
             name: 'heroDescription',

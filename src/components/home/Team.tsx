@@ -14,14 +14,16 @@ interface TeamMember {
 }
 
 interface TeamProps {
-    title?: string;
+    titlePrefix?: string;
+    titleHighlight?: string;
     description?: string;
     teamList?: TeamMember[];
     hideHeader?: boolean;
 }
 
 export function Team({
-    title = "The <br /> Team",
+    titlePrefix = "The",
+    titleHighlight = "Team",
     description = "Driven by passion, united by a vision for a cleaner planet.",
     teamList = teamData,
     hideHeader = false
@@ -34,7 +36,9 @@ export function Team({
             <div className="max-w-[1800px] mx-auto">
                 {!hideHeader && (
                     <div className="flex items-end justify-between mb-24">
-                        <h2 className="text-[5vw] leading-[0.9] font-bold tracking-tighter uppercase" dangerouslySetInnerHTML={{ __html: title }}>
+                        <h2 className="text-[5vw] leading-[0.9] font-bold tracking-tighter uppercase">
+                            {titlePrefix} <br />
+                            <span className="text-[#63C14B]">{titleHighlight}</span>
                         </h2>
                         <p className="max-w-xs text-neutral-500 text-sm">
                             {description}

@@ -251,11 +251,18 @@ export const homepage = defineType({
 
         // Services Section
         defineField({
-            name: 'servicesTitle',
-            title: 'Services Title',
+            name: 'servicesTitlePrefix',
+            title: 'Services Title Prefix',
             type: 'string',
             group: 'services',
-            initialValue: 'What We Do',
+            initialValue: 'What We',
+        }),
+        defineField({
+            name: 'servicesTitleHighlight',
+            title: 'Services Title Highlight',
+            type: 'string',
+            group: 'services',
+            initialValue: 'Do',
         }),
         defineField({
             name: 'servicesDescription',
@@ -456,11 +463,18 @@ export const homepage = defineType({
 
         // Team Section
         defineField({
-            name: 'teamTitle',
-            title: 'Team Title',
+            name: 'teamTitlePrefix',
+            title: 'Team Title Prefix',
             type: 'string',
             group: 'team',
-            initialValue: 'The Team',
+            initialValue: 'The',
+        }),
+        defineField({
+            name: 'teamTitleHighlight',
+            title: 'Team Title Highlight',
+            type: 'string',
+            group: 'team',
+            initialValue: 'Team',
         }),
         defineField({
             name: 'teamDescription',
@@ -472,11 +486,18 @@ export const homepage = defineType({
 
         // Blog Preview Section
         defineField({
-            name: 'blogPreviewTitle',
-            title: 'Blog Preview Title',
+            name: 'blogPreviewTitlePrefix',
+            title: 'Blog Preview Title Prefix',
             type: 'string',
             group: 'blog',
-            initialValue: 'Latest Blog',
+            initialValue: 'Latest',
+        }),
+        defineField({
+            name: 'blogPreviewTitleHighlight',
+            title: 'Blog Preview Title Highlight',
+            type: 'string',
+            group: 'blog',
+            initialValue: 'Blog',
         }),
     ],
     preview: {

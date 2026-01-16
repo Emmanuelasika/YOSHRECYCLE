@@ -204,7 +204,8 @@ async function migrate() {
                 }
             ],
 
-            servicesTitle: 'What We Do',
+            servicesTitlePrefix: 'What We',
+            servicesTitleHighlight: 'Do',
             servicesDescription: 'Bridging the gap between community waste and industrial value through three core pillars.',
             servicesList: [
                 {
@@ -310,9 +311,11 @@ async function migrate() {
             sponsorTitlePart2: 'Campaign',
             sponsorBadgeValue: '50kg+',
             sponsorBadgeLabel: 'Plastic Capacity',
-            teamTitle: 'The Team',
+            teamTitlePrefix: 'The',
+            teamTitleHighlight: 'Team',
             teamDescription: 'Driven by passion, united by a vision for a cleaner planet.',
-            blogPreviewTitle: 'Latest Blog'
+            blogPreviewTitlePrefix: 'Latest',
+            blogPreviewTitleHighlight: 'Blog'
         });
 
         // --- ABOUT PAGE ---
@@ -323,13 +326,16 @@ async function migrate() {
         await client.createOrReplace({
             _id: 'aboutPage',
             _type: 'aboutPage',
-            heroTitle: "We Are \nYosh Recycle",
+            heroTitlePrefix: "We Are",
+            heroTitleHighlight: "Yosh Recycle",
             heroDescription1: "Yosh Recycle is an indigenous waste recovery and recycling enterprise committed to environmental sustainability and social impact in Nigeria.",
             heroDescription2: "Founded with a vision to tackle the plastic waste crisis in Abuja, we have grown into a community-powered movement. We bridge the gap between household waste and industrial raw materials, creating value at every step of the chain.",
-            challengeTitle: "The Urban \nWaste Crisis",
+            challengeTitlePrefix: "The Urban",
+            challengeTitleHighlight: "Waste Crisis",
             challengeDescription: "Abuja generates over 13,000 tonnes of waste daily. Much of this ends up clogging our waterways, polluting our streets, and endangering public health.",
             challengeStats: "13,000 tonnes",
-            solutionTitle: "Our Solution",
+            solutionTitlePrefix: "Our",
+            solutionTitleHighlight: "Solution",
             solutionDescription: "We turn \"waste\" into a valuable resource. By incentivizing collection and streamlining the recycling process, we support local collectors and provide high-quality feedstock for manufacturing.",
             solutionList: ["Incentivized Collection", "Community Efficiency", "Industrial Feedstock", "Cleaner Neighborhoods"],
             beforeImage: aboutBeforeImgId ? { _type: 'image', asset: { _ref: aboutBeforeImgId } } : undefined,
@@ -370,7 +376,8 @@ async function migrate() {
             _id: 'teamPage',
             _type: 'teamPage',
             heroTag: "Our People",
-            heroTitle: "The Minds \nBehind Yosh",
+            heroTitlePrefix: "The Minds",
+            heroTitleHighlight: "Behind Yosh",
             heroDescription: "We are a collective of environmentalists, engineers, and community leaders driven by a single purpose: to redefine waste in Africa."
         });
 
@@ -410,7 +417,8 @@ async function migrate() {
         await client.createOrReplace({
             _id: 'faqPage',
             _type: 'faqPage',
-            heroTitle: "Common \nQuestions",
+            heroTitlePrefix: "Common",
+            heroTitleHighlight: "Questions",
             sidebarTitle: "Everything you need to know about our process, logistics, and impact.",
             sidebarDescription: "Can't find the answer you're looking for? Our team is ready to help you directly.",
             faqs: [
@@ -458,7 +466,8 @@ async function migrate() {
         await client.createOrReplace({
             _id: 'contactPage',
             _type: 'contactPage',
-            heroTitle: "Get In \nTouch",
+            heroTitlePrefix: "Get In",
+            heroTitleHighlight: "Touch",
             heroDescription: "Have questions about our process, interested in sponsorship, or want to partner with us? We'd love to hear from you.",
             address: "Abuja, Nigeria",
             email: "hello@yoshrecycle.org",
@@ -475,7 +484,8 @@ async function migrate() {
             _id: 'blogPage',
             _type: 'blogPage',
             heroTag: "Latest Updates",
-            heroTitle: "Our \nBlog",
+            heroTitlePrefix: "Our",
+            heroTitleHighlight: "Blog",
             heroDescription: "Documenting our mission to rid the world of waste, one community at a time."
         });
 

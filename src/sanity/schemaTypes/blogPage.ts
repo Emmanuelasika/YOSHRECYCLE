@@ -12,11 +12,16 @@ export const blogPage = defineType({
             initialValue: 'Latest Updates',
         }),
         defineField({
-            name: 'heroTitle',
-            title: 'Hero Title',
-            type: 'text',
-            initialValue: 'Our \nBlog',
-            rows: 2,
+            name: 'heroTitlePrefix',
+            title: 'Hero Title Prefix',
+            type: 'string',
+            initialValue: 'Our',
+        }),
+        defineField({
+            name: 'heroTitleHighlight',
+            title: 'Hero Title Highlight',
+            type: 'string',
+            initialValue: 'Blog',
         }),
         defineField({
             name: 'heroDescription',

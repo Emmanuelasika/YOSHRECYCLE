@@ -38,7 +38,8 @@ interface HomepageData {
     processTitleHighlight?: string;
     processDescription?: string;
     processSteps?: { id: string; title: string; desc: string; icon: string }[];
-    servicesTitle?: string;
+    servicesTitlePrefix?: string;
+    servicesTitleHighlight?: string;
     servicesDescription?: string;
     servicesList?: { title: string; description: string; image: string; tag: string }[];
     guideTitlePrefix?: string;
@@ -60,9 +61,11 @@ interface HomepageData {
     sponsorDescription?: string;
     sponsorBadgeValue?: string;
     sponsorBadgeLabel?: string;
-    teamTitle?: string;
+    teamTitlePrefix?: string;
+    teamTitleHighlight?: string;
     teamDescription?: string;
-    blogPreviewTitle?: string;
+    blogPreviewTitlePrefix?: string;
+    blogPreviewTitleHighlight?: string;
 }
 
 interface HomeDefaultProps {
@@ -107,7 +110,8 @@ export function HomeDefault({ data }: HomeDefaultProps) {
                 images={data?.galleryImages ?? undefined}
             />
             <Services
-                title={data?.servicesTitle ?? undefined}
+                titlePrefix={data?.servicesTitlePrefix ?? undefined}
+                titleHighlight={data?.servicesTitleHighlight ?? undefined}
                 description={data?.servicesDescription ?? undefined}
                 servicesList={data?.servicesList ?? undefined}
             />
@@ -142,11 +146,13 @@ export function HomeDefault({ data }: HomeDefaultProps) {
                 badgeLabel={data?.sponsorBadgeLabel}
             />
             <Team
-                title={data?.teamTitle}
+                titlePrefix={data?.teamTitlePrefix}
+                titleHighlight={data?.teamTitleHighlight}
                 description={data?.teamDescription}
             />
             <BlogPreview
-                title={data?.blogPreviewTitle}
+                titlePrefix={data?.blogPreviewTitlePrefix}
+                titleHighlight={data?.blogPreviewTitleHighlight}
             />
         </main>
     );

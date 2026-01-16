@@ -6,11 +6,16 @@ export const faqPage = defineType({
     type: 'document',
     fields: [
         defineField({
-            name: 'heroTitle',
-            title: 'Hero Title',
-            type: 'text',
-            initialValue: 'Common \nQuestions',
-            rows: 2,
+            name: 'heroTitlePrefix',
+            title: 'Hero Title Prefix',
+            type: 'string',
+            initialValue: 'Common',
+        }),
+        defineField({
+            name: 'heroTitleHighlight',
+            title: 'Hero Title Highlight',
+            type: 'string',
+            initialValue: 'Questions',
         }),
         defineField({
             name: 'sidebarTitle',

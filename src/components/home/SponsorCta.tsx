@@ -33,6 +33,8 @@ export function SponsorCta({
 }: SponsorCtaProps) {
     return (
         <section className="py-32 px-6 bg-[#090909] text-white relative overflow-hidden">
+            {/* Background Texture */}
+            <div className="absolute inset-0 pointer-events-none opacity-20 bg-[url('/assets/images/noise.svg')] z-0 mix-blend-overlay"></div>
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
 
                 {/* Visual / Image Side */}

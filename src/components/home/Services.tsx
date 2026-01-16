@@ -11,13 +11,15 @@ interface ServiceItem {
 }
 
 interface ServicesProps {
-    title?: string;
+    titlePrefix?: string;
+    titleHighlight?: string;
     description?: string;
     servicesList?: ServiceItem[];
 }
 
 export function Services({
-    title = "What <br /> <span class='text-[#63C14B]'>We Do</span>",
+    titlePrefix = "What We",
+    titleHighlight = "Do",
     description = "Bridging the gap between community waste and industrial value through three core pillars.",
     servicesList = [
         {
@@ -44,7 +46,9 @@ export function Services({
         <section id="services" className="py-24 px-6 bg-white text-black overflow-hidden border-t border-b border-black/5">
             <div className="max-w-[1800px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 px-4">
-                    <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none" dangerouslySetInnerHTML={{ __html: title }}>
+                    <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none">
+                        {titlePrefix} <br />
+                        <span className="text-[#63C14B]">{titleHighlight}</span>
                     </h2>
                     <p className="text-neutral-500 max-w-sm text-right mt-6 md:mt-0 font-medium">
                         {description}

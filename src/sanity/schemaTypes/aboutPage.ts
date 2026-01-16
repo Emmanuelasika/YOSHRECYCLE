@@ -6,11 +6,16 @@ export const aboutPage = defineType({
     type: 'document',
     fields: [
         defineField({
-            name: 'heroTitle',
-            title: 'Hero Title',
-            type: 'text', // Using text for multiline
-            initialValue: 'We Are \nYosh Recycle',
-            rows: 3,
+            name: 'heroTitlePrefix',
+            title: 'Hero Title Prefix',
+            type: 'string',
+            initialValue: 'We Are',
+        }),
+        defineField({
+            name: 'heroTitleHighlight',
+            title: 'Hero Title Highlight',
+            type: 'string',
+            initialValue: 'Yosh Recycle',
         }),
         defineField({
             name: 'heroDescription1',
@@ -26,10 +31,16 @@ export const aboutPage = defineType({
         }),
 
         defineField({
-            name: 'challengeTitle',
-            title: 'Challenge Title',
-            type: 'text',
-            initialValue: 'The Urban \nWaste Crisis',
+            name: 'challengeTitlePrefix',
+            title: 'Challenge Title Prefix',
+            type: 'string',
+            initialValue: 'The Urban',
+        }),
+        defineField({
+            name: 'challengeTitleHighlight',
+            title: 'Challenge Title Highlight',
+            type: 'string',
+            initialValue: 'Waste Crisis',
         }),
         defineField({
             name: 'challengeDescription',
@@ -45,10 +56,16 @@ export const aboutPage = defineType({
         }),
 
         defineField({
-            name: 'solutionTitle',
-            title: 'Solution Title',
+            name: 'solutionTitlePrefix',
+            title: 'Solution Title Prefix',
             type: 'string',
-            initialValue: 'Our Solution',
+            initialValue: 'Our',
+        }),
+        defineField({
+            name: 'solutionTitleHighlight',
+            title: 'Solution Title Highlight',
+            type: 'string',
+            initialValue: 'Solution',
         }),
         defineField({
             name: 'solutionDescription',

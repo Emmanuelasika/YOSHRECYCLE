@@ -54,7 +54,8 @@ export default async function BlogPage(props: BlogPageProps) {
                             {pageData?.heroTag || "Latest Updates"}
                         </span>
                         <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.9] md:leading-[0.85]">
-                            {renderMultiline(pageData?.heroTitle) || <>Our <br /> <span className="text-[#63C14B]">Blog</span></>}
+                            {pageData?.heroTitlePrefix || "Our"} <br />
+                            <span className="text-[#63C14B]">{pageData?.heroTitleHighlight || "Blog"}</span>
                         </h1>
                     </div>
                     <p className="text-xl md:text-2xl font-medium text-neutral-500 max-w-md text-right mt-8 md:mt-0">

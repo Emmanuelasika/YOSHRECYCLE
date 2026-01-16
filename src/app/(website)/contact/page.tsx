@@ -15,7 +15,7 @@ export default async function ContactPage() {
     return (
         <main className="pt-24 min-h-screen bg-white text-black selection:bg-[#63C14B] selection:text-white relative overflow-hidden">
             {/* Background Texture - Light Mode */}
-            <div className="fixed inset-0 pointer-events-none opacity-40 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-0 mix-blend-multiply"></div>
+            <div className="fixed inset-0 pointer-events-none opacity-40 bg-[url('/assets/images/noise.svg')] z-0 mix-blend-multiply"></div>
 
             <section className="relative pt-20 pb-20 px-[5vw] z-10">
                 <div className="max-w-[1800px] mx-auto grid lg:grid-cols-2 gap-20 items-start">
@@ -28,7 +28,8 @@ export default async function ContactPage() {
                         </div>
 
                         <h1 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9] mb-8 text-neutral-900">
-                            {renderMultiline(data?.heroTitle) || <>Get In <br /><span className="text-[#63C14B]">Touch</span></>}
+                            {data?.heroTitlePrefix || "Get In"} <br />
+                            <span className="text-[#63C14B]">{data?.heroTitleHighlight || "Touch"}</span>
                         </h1>
                         <p className="text-xl md:text-2xl text-neutral-500 max-w-xl leading-relaxed mb-16">
                             {data?.heroDescription || "Have questions about our process, interested in sponsorship, or want to partner with us? We'd love to hear from you."}

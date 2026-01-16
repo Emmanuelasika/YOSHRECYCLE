@@ -12,11 +12,16 @@ export const teamPage = defineType({
             initialValue: 'Our People',
         }),
         defineField({
-            name: 'heroTitle',
-            title: 'Hero Title',
-            type: 'text',
-            initialValue: 'The Minds \nBehind Yosh',
-            rows: 2,
+            name: 'heroTitlePrefix',
+            title: 'Hero Title Prefix',
+            type: 'string',
+            initialValue: 'The Minds',
+        }),
+        defineField({
+            name: 'heroTitleHighlight',
+            title: 'Hero Title Highlight',
+            type: 'string',
+            initialValue: 'Behind Yosh',
         }),
         defineField({
             name: 'heroDescription',

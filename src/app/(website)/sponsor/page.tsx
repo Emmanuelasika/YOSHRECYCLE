@@ -23,7 +23,7 @@ export default async function SponsorPage() {
     return (
         <main className="pt-24 min-h-screen bg-black text-white selection:bg-[#63C14B] selection:text-black relative overflow-hidden">
             {/* Background Texture */}
-            <div className="fixed inset-0 pointer-events-none opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-0 mix-blend-overlay"></div>
+            <div className="fixed inset-0 pointer-events-none opacity-20 bg-[url('/assets/images/noise.svg')] z-0 mix-blend-overlay"></div>
             <div className="fixed top-0 right-0 w-[50vw] h-[50vw] bg-[#63C14B]/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
 
             {/* HERO SECTION with Integrated Payments */}
@@ -78,7 +78,7 @@ export default async function SponsorPage() {
                     <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
                         <div>
                             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4">
-                                {data?.benefitsTitle ? <span dangerouslySetInnerHTML={{ __html: data.benefitsTitle.replace("Support Us", "<span class='text-[#63C14B]'>Support Us</span>") }} /> : <>Why <span className="text-[#63C14B]">Support Us?</span></>}
+                                {data?.benefitsTitle && typeof data.benefitsTitle === 'string' ? <span dangerouslySetInnerHTML={{ __html: data.benefitsTitle.replace("Support Us", "<span class='text-[#63C14B]'>Support Us</span>") }} /> : <>Why <span className="text-[#63C14B]">Support Us?</span></>}
                             </h2>
                             <p className="text-lg text-neutral-400 max-w-xl">
                                 {data?.benefitsDescription || "Your sponsorship funds the critical infrastructure needed to collect, sort, and process waste at the source."}

@@ -21,7 +21,8 @@ export default async function FAQPage() {
             <div className="bg-black text-white pt-40 pb-20 px-[5vw]">
                 <div className="max-w-[1800px] mx-auto">
                     <h1 className="text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase mb-8">
-                        {renderMultiline(data?.heroTitle) || <>Common <br /><span className="text-[#63C14B]">Questions</span></>}
+                        {data?.heroTitlePrefix || "Common"} <br />
+                        <span className="text-[#63C14B]">{data?.heroTitleHighlight || "Questions"}</span>
                     </h1>
                 </div>
             </div>

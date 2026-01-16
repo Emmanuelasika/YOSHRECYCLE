@@ -79,7 +79,8 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
     desc,
     icon
   },
-  servicesTitle,
+  servicesTitlePrefix,
+  servicesTitleHighlight,
   servicesDescription,
   servicesList[] {
     title,
@@ -117,20 +118,25 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
   sponsorDescription,
   sponsorBadgeValue,
   sponsorBadgeLabel,
-  teamTitle,
+  teamTitlePrefix,
+  teamTitleHighlight,
   teamDescription,
-  blogPreviewTitle
+  blogPreviewTitlePrefix,
+  blogPreviewTitleHighlight
 }`;
 
 // Get about page content
 export const ABOUT_PAGE_QUERY = groq`*[_type == "aboutPage"][0] {
-  heroTitle,
+  heroTitlePrefix,
+  heroTitleHighlight,
   heroDescription1,
   heroDescription2,
-  challengeTitle,
+  challengeTitlePrefix,
+  challengeTitleHighlight,
   challengeDescription,
   challengeStats,
-  solutionTitle,
+  solutionTitlePrefix,
+  solutionTitleHighlight,
   solutionDescription,
   solutionList,
   beforeImage,
@@ -160,7 +166,8 @@ export const SPONSOR_PAGE_QUERY = groq`*[_type == "sponsorPage"][0] {
 export const TEAM_PAGE_QUERY = groq`{
   "page": *[_type == "teamPage"][0] {
     heroTag,
-    heroTitle,
+    heroTitlePrefix,
+    heroTitleHighlight,
     heroDescription
   },
   "members": *[_type == "teamMember"] | order(order asc) {
@@ -175,7 +182,8 @@ export const TEAM_PAGE_QUERY = groq`{
 }`;
 
 export const FAQ_PAGE_QUERY = groq`*[_type == "faqPage"][0] {
-  heroTitle,
+  heroTitlePrefix,
+  heroTitleHighlight,
   sidebarTitle,
   sidebarDescription,
   faqs[] {
@@ -186,7 +194,8 @@ export const FAQ_PAGE_QUERY = groq`*[_type == "faqPage"][0] {
 }`;
 
 export const CONTACT_PAGE_QUERY = groq`*[_type == "contactPage"][0] {
-  heroTitle,
+  heroTitlePrefix,
+  heroTitleHighlight,
   heroDescription,
   address,
   email,
@@ -199,6 +208,8 @@ export const CONTACT_PAGE_QUERY = groq`*[_type == "contactPage"][0] {
 
 export const BLOG_PAGE_QUERY = groq`*[_type == "blogPage"][0] {
   heroTag,
-  heroTitle,
+  heroTag,
+  heroTitlePrefix,
+  heroTitleHighlight,
   heroDescription
 }`;

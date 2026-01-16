@@ -14,13 +14,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 interface BlogPreviewProps {
-    title?: string;
+    titlePrefix?: string;
+    titleHighlight?: string;
     buttonText?: string;
     buttonUrl?: string;
 }
 
 export function BlogPreview({
-    title = "Latest <br /> <span class='text-[#63C14B]'>Blog</span>",
+    titlePrefix = "Latest",
+    titleHighlight = "Blog",
     buttonText = "View Blog",
     buttonUrl = "/blog"
 }: BlogPreviewProps) {
@@ -46,8 +48,9 @@ export function BlogPreview({
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                         className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none"
-                        dangerouslySetInnerHTML={{ __html: title }}
                     >
+                        {titlePrefix} <br />
+                        <span className="text-[#63C14B]">{titleHighlight}</span>
                     </motion.h2>
 
                     <motion.div
