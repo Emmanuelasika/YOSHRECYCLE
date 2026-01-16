@@ -1,8 +1,8 @@
 import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "@/components/builder";
 import { HomeDefault } from "@/components/home/HomeDefault";
+import "@/lib/builder"; // Ensure builder is initialized
 
-// Builder.io fetching logic
 // Builder.io fetching logic
 export default async function Home() {
     let content = null;

@@ -1,10 +1,7 @@
 import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "@/components/builder";
 import { registerComponents } from "@/components/builder-registry";
-
-
-// Initialize Builder with your public API key
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+import "@/lib/builder"; // Ensure builder is initialized
 
 interface PageProps {
     params: Promise<{
@@ -18,13 +15,18 @@ export default async function Page(props: PageProps) {
     // Run component registration
     registerComponents();
 
-    const content = await builder
-        .get("page", {
-            userAttributes: {
-                urlPath: "/" + (params?.page?.join("/") || ""),
-            },
-        })
-        .toPromise();
+    let content = null;
+    try {
+        content = await builder
+            .get("page", {
+                userAttributes: {
+                    urlPath: "/" + (params?.page?.join("/") || ""),
+                },
+            })
+            .toPromise();
+    } catch (error) {
+        console.warn("Error fetching builder content for page:", params?.page, error);
+    }
 
     return (
         <>
