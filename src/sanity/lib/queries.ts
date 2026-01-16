@@ -42,3 +42,116 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0] {
   body,
   author
 }`;
+
+// Get homepage content
+export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
+  heroTitle,
+  heroSubtitle,
+  heroVideoUrl,
+  heroPrimaryButtonLabel,
+  heroPrimaryButtonLink,
+  heroSecondaryButtonLabel,
+  heroSecondaryButtonLink,
+  missionTitle,
+  missionStat1Value,
+  missionStat1Label,
+  missionStat2Value,
+  missionStat2Label,
+  impactTitle,
+  impactSubtitle,
+  impactStats,
+  servicesTitle,
+  servicesDescription,
+  servicesList[] {
+    title,
+    description,
+    image,
+    tag
+  },
+  galleryTitle,
+  galleryImages,
+  testimonialsTitle,
+  testimonialsList,
+  sponsorTitle,
+  sponsorDescription,
+  sponsorBadgeValue,
+  sponsorBadgeLabel,
+  teamTitle,
+  teamDescription,
+  blogPreviewTitle
+}`;
+
+// Get about page content
+export const ABOUT_PAGE_QUERY = groq`*[_type == "aboutPage"][0] {
+  heroTitle,
+  heroDescription1,
+  heroDescription2,
+  challengeTitle,
+  challengeDescription,
+  challengeStats,
+  solutionTitle,
+  solutionDescription,
+  solutionList,
+  beforeImage,
+  afterImage,
+  beforeLabel,
+  afterLabel
+}`;
+
+// Get sponsor page content
+export const SPONSOR_PAGE_QUERY = groq`*[_type == "sponsorPage"][0] {
+  heroTitle,
+  heroSubtitle,
+  statsHomesReached,
+  statsPlasticCollected,
+  benefitsTitle,
+  benefitsDescription,
+  benefitsList
+}`;
+
+// Get team page content
+export const TEAM_PAGE_QUERY = groq`{
+  "page": *[_type == "teamPage"][0] {
+    heroTag,
+    heroTitle,
+    heroDescription
+  },
+  "members": *[_type == "teamMember"] | order(order asc) {
+    name,
+    role,
+    img,
+    bio,
+    linkedin,
+    twitter,
+    instagram
+  }
+}`;
+
+export const FAQ_PAGE_QUERY = groq`*[_type == "faqPage"][0] {
+  heroTitle,
+  sidebarTitle,
+  sidebarDescription,
+  faqs[] {
+    category,
+    question,
+    answer
+  }
+}`;
+
+export const CONTACT_PAGE_QUERY = groq`*[_type == "contactPage"][0] {
+  heroTitle,
+  heroDescription,
+  address,
+  email,
+  phone,
+  instagram,
+  twitter,
+  facebook,
+  linkedin
+}`;
+
+export const BLOG_PAGE_QUERY = groq`*[_type == "blogPage"][0] {
+  heroTag,
+  heroTitle,
+  heroDescription
+}`;

@@ -1,5 +1,5 @@
-import { client } from "@/sanity/lib/client";
-import { PAGINATED_POSTS_QUERY, POSTS_COUNT_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/live";
+import { PAGINATED_POSTS_QUERY, POSTS_COUNT_QUERY, BLOG_PAGE_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,12 +25,23 @@ export default async function BlogPage(props: BlogPageProps) {
     const end = start + POSTS_PER_PAGE;
 
     // Parallel data fetching
-    const [posts, totalPosts] = await Promise.all([
-        client.fetch(PAGINATED_POSTS_QUERY, { start, end }),
-        client.fetch(POSTS_COUNT_QUERY)
+    const [postsResult, totalPostsResult, pageDataResult] = await Promise.all([
+        sanityFetch({ query: PAGINATED_POSTS_QUERY, params: { start, end } }),
+        sanityFetch({ query: POSTS_COUNT_QUERY }),
+        sanityFetch({ query: BLOG_PAGE_QUERY })
     ]);
 
+    const posts = postsResult.data;
+    const totalPosts = totalPostsResult.data;
+    const pageData = pageDataResult.data;
+
     const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+
+    // Helper for multiline text
+    const renderMultiline = (text: string) => {
+        if (!text) return null;
+        return <span dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }} />;
+    };
 
     return (
         <main className="min-h-screen bg-white pt-32 md:pt-40 pb-32 px-6 md:px-[5vw]">
@@ -39,13 +50,15 @@ export default async function BlogPage(props: BlogPageProps) {
                 {/* Brand Header */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-32 border-b border-black/10 pb-12">
                     <div>
-                        <span className="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">Latest Updates</span>
+                        <span className="block text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">
+                            {pageData?.heroTag || "Latest Updates"}
+                        </span>
                         <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold tracking-tighter uppercase leading-[0.9] md:leading-[0.85]">
-                            Our <br /> <span className="text-[#63C14B]">Blog</span>
+                            {renderMultiline(pageData?.heroTitle) || <>Our <br /> <span className="text-[#63C14B]">Blog</span></>}
                         </h1>
                     </div>
                     <p className="text-xl md:text-2xl font-medium text-neutral-500 max-w-md text-right mt-8 md:mt-0">
-                        Documenting our mission to rid the world of waste, one community at a time.
+                        {pageData?.heroDescription || "Documenting our mission to rid the world of waste, one community at a time."}
                     </p>
                 </div>
 

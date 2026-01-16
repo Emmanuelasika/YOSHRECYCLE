@@ -1,9 +1,17 @@
-"use client";
-
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Mail, MapPin, Phone, Instagram, Twitter, Facebook, Linkedin } from "lucide-react";
+import { sanityFetch } from "@/sanity/lib/live";
+import { CONTACT_PAGE_QUERY } from "@/sanity/lib/queries";
 
-export default function ContactPage() {
+export default async function ContactPage() {
+    const { data } = await sanityFetch({ query: CONTACT_PAGE_QUERY });
+
+    // Helper for multiline text
+    const renderMultiline = (text: string) => {
+        if (!text) return null;
+        return <span dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }} />;
+    };
+
     return (
         <main className="pt-24 min-h-screen bg-white text-black selection:bg-[#63C14B] selection:text-white relative overflow-hidden">
             {/* Background Texture - Light Mode */}
@@ -20,11 +28,10 @@ export default function ContactPage() {
                         </div>
 
                         <h1 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9] mb-8 text-neutral-900">
-                            Get In <br />
-                            <span className="text-[#63C14B]">Touch</span>
+                            {renderMultiline(data?.heroTitle) || <>Get In <br /><span className="text-[#63C14B]">Touch</span></>}
                         </h1>
                         <p className="text-xl md:text-2xl text-neutral-500 max-w-xl leading-relaxed mb-16">
-                            Have questions about our process, interested in sponsorship, or want to partner with us? We'd love to hear from you.
+                            {data?.heroDescription || "Have questions about our process, interested in sponsorship, or want to partner with us? We'd love to hear from you."}
                         </p>
 
                         <div className="space-y-10 border-l border-neutral-200 pl-8 ml-2">
@@ -32,22 +39,22 @@ export default function ContactPage() {
                             {/* Address */}
                             <div className="relative group">
                                 <h3 className="font-bold uppercase tracking-widest text-[#63C14B] text-xs mb-2">Visit Us</h3>
-                                <p className="text-2xl text-neutral-900 font-medium group-hover:translate-x-2 transition-transform">Abuja, Nigeria</p>
+                                <p className="text-2xl text-neutral-900 font-medium group-hover:translate-x-2 transition-transform">{data?.address || "Abuja, Nigeria"}</p>
                             </div>
 
                             {/* Email */}
                             <div className="relative group">
                                 <h3 className="font-bold uppercase tracking-widest text-[#63C14B] text-xs mb-2">Email</h3>
-                                <a href="mailto:hello@yoshrecycle.org" className="text-2xl text-neutral-900 font-medium hover:text-[#63C14B] transition-colors group-hover:translate-x-2 inline-block">
-                                    hello@yoshrecycle.org
+                                <a href={`mailto:${data?.email || "hello@yoshrecycle.org"}`} className="text-2xl text-neutral-900 font-medium hover:text-[#63C14B] transition-colors group-hover:translate-x-2 inline-block">
+                                    {data?.email || "hello@yoshrecycle.org"}
                                 </a>
                             </div>
 
                             {/* Phone */}
                             <div className="relative group">
                                 <h3 className="font-bold uppercase tracking-widest text-[#63C14B] text-xs mb-2">Call Us</h3>
-                                <a href="tel:+2349163937111" className="text-2xl text-neutral-900 font-medium hover:text-[#63C14B] transition-colors group-hover:translate-x-2 inline-block">
-                                    +234 916 393 7111
+                                <a href={`tel:${data?.phone || "+2349163937111"}`} className="text-2xl text-neutral-900 font-medium hover:text-[#63C14B] transition-colors group-hover:translate-x-2 inline-block">
+                                    {data?.phone || "+234 916 393 7111"}
                                 </a>
                             </div>
 
@@ -55,16 +62,16 @@ export default function ContactPage() {
                             <div className="relative">
                                 <h3 className="font-bold uppercase tracking-widest text-[#63C14B] text-xs mb-4">Socials</h3>
                                 <div className="flex gap-4">
-                                    <a href="https://www.instagram.com/yoshrecycle?igsh=MWtjamRkN2xpbWh6Ng==" target="_blank" className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-all hover:scale-110">
+                                    <a href={data?.instagram || "https://www.instagram.com/yoshrecycle?igsh=MWtjamRkN2xpbWh6Ng=="} target="_blank" className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-all hover:scale-110">
                                         <Instagram size={20} />
                                     </a>
-                                    <a href="https://x.com/YoshRecycle" target="_blank" className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-all hover:scale-110">
+                                    <a href={data?.twitter || "https://x.com/YoshRecycle"} target="_blank" className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-all hover:scale-110">
                                         <Twitter size={20} />
                                     </a>
-                                    <a href="https://www.facebook.com/profile.php?id=61551544979983" target="_blank" className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-all hover:scale-110">
+                                    <a href={data?.facebook || "https://www.facebook.com/profile.php?id=61551544979983"} target="_blank" className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-all hover:scale-110">
                                         <Facebook size={20} />
                                     </a>
-                                    <a href="https://www.linkedin.com/company/109765401" target="_blank" className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-all hover:scale-110">
+                                    <a href={data?.linkedin || "https://www.linkedin.com/company/109765401"} target="_blank" className="w-12 h-12 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-[#63C14B] hover:text-white transition-all hover:scale-110">
                                         <Linkedin size={20} />
                                     </a>
                                 </div>

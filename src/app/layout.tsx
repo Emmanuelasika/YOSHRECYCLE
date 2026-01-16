@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { SanityLive } from "@/sanity/lib/live";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={cn(inter.variable, "antialiased selection:bg-[#63C14B] selection:text-white bg-white text-black")}>
         {children}
         <Toaster position="top-center" />
+        <SanityLive />
       </body>
     </html>
   );

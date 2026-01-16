@@ -1,16 +1,24 @@
-"use client";
-
 import { SponsorshipOptions } from "@/components/sponsor/SponsorshipOptions";
 import { Check } from "lucide-react";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SPONSOR_PAGE_QUERY } from "@/sanity/lib/queries";
 
-export default function SponsorPage() {
-    const benefits = [
+export default async function SponsorPage() {
+    const { data } = await sanityFetch({ query: SPONSOR_PAGE_QUERY });
+
+    const benefits = data?.benefitsList || [
         "Your logo prominently displayed on recycling bags distributed to thousands of households",
         "Direct association with environmental sustainability and community impact",
         "Measurable social impact reports (kg collected, families impacted)",
         "Tax-deductible CSR contribution benefits",
         "Digital features on our social media and website"
     ];
+
+    // Helper for multiline text
+    const renderMultiline = (text: string) => {
+        if (!text) return null;
+        return <span dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }} />;
+    };
 
     return (
         <main className="pt-24 min-h-screen bg-black text-white selection:bg-[#63C14B] selection:text-black relative overflow-hidden">
@@ -30,21 +38,20 @@ export default function SponsorPage() {
                         </div>
 
                         <h1 className="text-5xl md:text-7xl xl:text-8xl font-bold uppercase tracking-tighter mb-8 leading-[0.9]">
-                            Sponsor A <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#63C14B] via-emerald-400 to-[#63C14B] bg-300% animate-gradient">Brand Bag</span>
+                            {renderMultiline(data?.heroTitle) || <>Sponsor A <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#63C14B] via-emerald-400 to-[#63C14B] bg-300% animate-gradient">Brand Bag</span></>}
                         </h1>
                         <p className="text-xl md:text-2xl text-neutral-400 max-w-xl leading-relaxed mb-12">
-                            Transform your corporate social responsibility into tangible environmental action. <span className="text-white">Put your logo in the hands of the community.</span>
+                            {data?.heroSubtitle || <>Transform your corporate social responsibility into tangible environmental action. <span className="text-white">Put your logo in the hands of the community.</span></>}
                         </p>
 
                         {/* Stats - Horizontal */}
                         <div className="flex gap-12 border-t border-white/10 pt-8">
                             <div>
-                                <span className="block text-3xl font-bold text-white mb-1">5,000+</span>
+                                <span className="block text-3xl font-bold text-white mb-1">{data?.statsHomesReached || "5,000+"}</span>
                                 <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">Homes Reached</span>
                             </div>
                             <div>
-                                <span className="block text-3xl font-bold text-white mb-1">200k+</span>
+                                <span className="block text-3xl font-bold text-white mb-1">{data?.statsPlasticCollected || "200k+"}</span>
                                 <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">Kg Plastic</span>
                             </div>
                         </div>
@@ -68,10 +75,10 @@ export default function SponsorPage() {
                     <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
                         <div>
                             <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4">
-                                Why <span className="text-[#63C14B]">Support Us?</span>
+                                {data?.benefitsTitle ? <span dangerouslySetInnerHTML={{ __html: data.benefitsTitle.replace("Support Us", "<span class='text-[#63C14B]'>Support Us</span>") }} /> : <>Why <span className="text-[#63C14B]">Support Us?</span></>}
                             </h2>
                             <p className="text-lg text-neutral-400 max-w-xl">
-                                Your sponsorship funds the critical infrastructure needed to collect, sort, and process waste at the source.
+                                {data?.benefitsDescription || "Your sponsorship funds the critical infrastructure needed to collect, sort, and process waste at the source."}
                             </p>
                         </div>
                         <a href="/contact" className="px-8 py-4 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all font-bold uppercase tracking-widest text-xs">
@@ -80,7 +87,7 @@ export default function SponsorPage() {
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {benefits.map((benefit, i) => (
+                        {benefits.map((benefit: string, i: number) => (
                             <div key={i} className="group p-8 rounded-3xl bg-black border border-white/10 hover:border-[#63C14B]/50 transition-all hover:-translate-y-1 relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#63C14B]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#63C14B]/10 transition-colors"></div>
 
