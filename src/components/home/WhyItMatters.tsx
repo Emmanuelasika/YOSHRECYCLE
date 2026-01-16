@@ -3,7 +3,39 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-export function WhyItMatters() {
+interface ReasonItem {
+    title: string;
+    desc: string;
+    img: string;
+}
+
+interface WhyItMattersProps {
+    title?: string;
+    subtitle?: string;
+    reasonsList?: ReasonItem[];
+}
+
+export function WhyItMatters({
+    title = "Why It <br /> <span class='text-[#63C14B]'>Matters</span>",
+    subtitle = "Abuja produces over <span class='text-black font-medium'>13,000 tonnes</span> of waste daily. We are the defense line.",
+    reasonsList = [
+        {
+            title: "Stop Pollution",
+            desc: "Preventing plastics from clogging our drains and polluting our precious waterways.",
+            img: "/assets/images/pollution_river.png"
+        },
+        {
+            title: "Create Jobs",
+            desc: "Building a green economy that provides stable employment for women and youth.",
+            img: "/assets/images/recycling_worker.png"
+        },
+        {
+            title: "Future Proof",
+            desc: "Educating the next generation to value resources and protect their environment.",
+            img: "/assets/images/future_child.png"
+        },
+    ]
+}: WhyItMattersProps) {
     return (
         <section className="min-h-screen py-32 px-6 bg-white text-black flex items-center">
             <div className="max-w-[1800px] mx-auto w-full">
@@ -16,9 +48,8 @@ export function WhyItMatters() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                         className="text-6xl md:text-9xl font-bold tracking-tighter uppercase leading-[0.85]"
+                        dangerouslySetInnerHTML={{ __html: title }}
                     >
-                        Why It <br />
-                        <span className="text-[#63C14B]">Matters</span>
                     </motion.h2>
 
                     <motion.p
@@ -27,30 +58,14 @@ export function WhyItMatters() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-2xl md:text-3xl font-light text-neutral-600 max-w-xl text-right md:text-right"
+                        dangerouslySetInnerHTML={{ __html: subtitle }}
                     >
-                        Abuja produces over <span className="text-black font-medium">13,000 tonnes</span> of waste daily. We are the defense line.
                     </motion.p>
                 </div>
 
                 {/* Content Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {[
-                        {
-                            title: "Stop Pollution",
-                            desc: "Preventing plastics from clogging our drains and polluting our precious waterways.",
-                            img: "/assets/images/pollution_river.png"
-                        },
-                        {
-                            title: "Create Jobs",
-                            desc: "Building a green economy that provides stable employment for women and youth.",
-                            img: "/assets/images/recycling_worker.png"
-                        },
-                        {
-                            title: "Future Proof",
-                            desc: "Educating the next generation to value resources and protect their environment.",
-                            img: "/assets/images/future_child.png"
-                        },
-                    ].map((item, i) => (
+                    {reasonsList.map((item, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 50 }}

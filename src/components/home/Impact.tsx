@@ -3,7 +3,26 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-export function Impact() {
+interface ImpactStat {
+    val: string;
+    label: string;
+}
+
+interface ImpactProps {
+    title?: string;
+    subtitle?: string;
+    stats?: ImpactStat[];
+}
+
+export function Impact({
+    title = "Real <br /> <span class='text-[#63C14B]'>Numbers</span>.",
+    subtitle = "Measurable impact on our environment and our local economy.",
+    stats = [
+        { val: "205k+", label: "Plastics Collected (kg)" },
+        { val: "5k+", label: "Homes Satisfied" },
+        { val: "25+", label: "Industries Served" },
+    ]
+}: ImpactProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -20,20 +39,16 @@ export function Impact() {
                             animate={isInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.8 }}
                             className="text-[6vw] leading-[0.9] font-bold tracking-tighter uppercase mb-12"
+                            dangerouslySetInnerHTML={{ __html: title }}
                         >
-                            Real <br /> <span className="text-[#63C14B]">Numbers</span>.
                         </motion.h2>
                         <p className="text-xl text-neutral-400 max-w-md">
-                            Measurable impact on our environment and our local economy.
+                            {subtitle}
                         </p>
                     </div>
 
                     <div className="space-y-12">
-                        {[
-                            { val: "205k+", label: "Plastics Collected (kg)" },
-                            { val: "5k+", label: "Homes Satisfied" },
-                            { val: "25+", label: "Industries Served" },
-                        ].map((item, i) => (
+                        {stats.map((item, i) => (
                             <motion.div
                                 key={i}
                                 initial={{ opacity: 0, x: 50 }}

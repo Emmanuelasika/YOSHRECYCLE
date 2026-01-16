@@ -3,7 +3,21 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-export function Mission() {
+interface MissionProps {
+    title?: string;
+    stat1Value?: string;
+    stat1Label?: string;
+    stat2Value?: string;
+    stat2Label?: string;
+}
+
+export function Mission({
+    title = "To rid Nigeria of plastic waste, one state at a time. We believe waste is a <span class='text-[#63C14B]'>design flaw</span>, not an inevitability.",
+    stat1Value = "350+ Tons",
+    stat1Label = "Plastic recoverd annually from local communities.",
+    stat2Value = "Zero Cost",
+    stat2Label = "Free collection for households and businesses.",
+}: MissionProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-10%" });
 
@@ -22,9 +36,8 @@ export function Mission() {
                             animate={isInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.8, ease: "easeOut" }}
                             className="text-4xl md:text-6xl lg:text-7xl font-medium leading-[1.1] tracking-tight"
-                        >
-                            To rid the world of plastic waste, one state at a time. We believe waste is a <span className="text-[#63C14B]">design flaw</span>, not an inevitability.
-                        </motion.p>
+                            dangerouslySetInnerHTML={{ __html: title }}
+                        />
 
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -33,12 +46,12 @@ export function Mission() {
                             className="mt-12 grid grid-cols-2 gap-8 max-w-lg"
                         >
                             <div>
-                                <h4 className="font-bold mb-2">350+ Tons</h4>
-                                <p className="text-sm text-neutral-500">Plastic recoverd annually from local communities.</p>
+                                <h4 className="font-bold mb-2">{stat1Value}</h4>
+                                <p className="text-sm text-neutral-500">{stat1Label}</p>
                             </div>
                             <div>
-                                <h4 className="font-bold mb-2">Zero Cost</h4>
-                                <p className="text-sm text-neutral-500">Free collection for households and businesses.</p>
+                                <h4 className="font-bold mb-2">{stat2Value}</h4>
+                                <p className="text-sm text-neutral-500">{stat2Label}</p>
                             </div>
                         </motion.div>
                     </div>

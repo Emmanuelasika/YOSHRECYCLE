@@ -4,28 +4,43 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
-const products = [
-    {
-        title: "Hot Washed",
-        subtitle: "PET Flakes",
-        desc: "Premium purity (<50ppm PVC) for high-end fiber application.",
-        img: "/assets/products/hot-washed.png"
-    },
-    {
-        title: "Cold Washed",
-        subtitle: "PET Flakes",
-        desc: "Industrial grade flakes for strapping and non-food packaging.",
-        img: "/assets/products/cold-washed.png"
-    },
-    {
-        title: "Pressed Bales",
-        subtitle: "HDPE/PET",
-        desc: "High density bales sorted by color and polymer type.",
-        img: "/assets/products/bales.png"
-    },
-];
+interface ProductItem {
+    title: string;
+    subtitle: string;
+    desc: string;
+    img: string;
+}
 
-export function Products() {
+interface ProductsProps {
+    introTitle?: string;
+    introDesc?: string;
+    productsList?: ProductItem[];
+}
+
+export function Products({
+    introTitle = "Our <br /> <span class='text-[#63C14B]'>Products</span>",
+    introDesc = "We supply the manufacturing industry with high-quality recycled raw materials. Scroll to see what we make.",
+    productsList = [
+        {
+            title: "Hot Washed",
+            subtitle: "PET Flakes",
+            desc: "Premium purity (<50ppm PVC) for high-end fiber application.",
+            img: "/assets/products/hot-washed.png"
+        },
+        {
+            title: "Cold Washed",
+            subtitle: "PET Flakes",
+            desc: "Industrial grade flakes for strapping and non-food packaging.",
+            img: "/assets/products/cold-washed.png"
+        },
+        {
+            title: "Pressed Bales",
+            subtitle: "HDPE/PET",
+            desc: "High density bales sorted by color and polymer type.",
+            img: "/assets/products/bales.png"
+        },
+    ]
+}: ProductsProps) {
     const targetRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: targetRef,
@@ -44,11 +59,10 @@ export function Products() {
                     {/* Intro Card */}
                     <div className="w-screen h-screen flex-shrink-0 flex items-center justify-center px-[5vw] border-r border-black/5 bg-white relative overflow-hidden">
                         <div className="relative z-10 max-w-4xl">
-                            <h2 className="text-[8vw] font-bold leading-[0.85] tracking-tighter uppercase mb-8">
-                                Our <br /> <span className="text-[#63C14B]">Products</span>
+                            <h2 className="text-[8vw] font-bold leading-[0.85] tracking-tighter uppercase mb-8" dangerouslySetInnerHTML={{ __html: introTitle }}>
                             </h2>
                             <p className="max-w-xl text-xl text-neutral-500">
-                                We supply the manufacturing industry with high-quality recycled raw materials. Scroll to see what we make.
+                                {introDesc}
                             </p>
                         </div>
                         {/* Decorative background element */}
@@ -56,7 +70,7 @@ export function Products() {
                     </div>
 
                     {/* Product Cards */}
-                    {products.map((product, i) => (
+                    {productsList.map((product, i) => (
                         <div key={i} className="w-screen h-screen flex-shrink-0 flex border-r border-black/5 bg-white overflow-hidden">
                             {/* Text Side (Left) */}
                             <div className="w-1/2 flex flex-col justify-center px-[8vw] relative z-10 bg-white">

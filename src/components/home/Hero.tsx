@@ -4,7 +4,25 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDown } from "lucide-react";
 
-export function Hero() {
+interface HeroProps {
+    title?: string;
+    subtitle?: string;
+    videoUrl?: string;
+    ctaPrimaryLabel?: string;
+    ctaPrimaryLink?: string;
+    ctaSecondaryLabel?: string;
+    ctaSecondaryLink?: string;
+}
+
+export function Hero({
+    title = "Community Powered Recycling",
+    subtitle = "We are a community powered plastic recycling initiative. We collect at source, reduce waste, and protect the planet.",
+    videoUrl = "/assets/videos/video-2.mp4",
+    ctaPrimaryLabel = "Our Mission",
+    ctaPrimaryLink = "/about",
+    ctaSecondaryLabel = "Sponsor a Bag",
+    ctaSecondaryLink = "/sponsor",
+}: HeroProps) {
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -13,6 +31,20 @@ export function Hero() {
 
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+    // Parse title for line breaks if it's the default one or just render string
+    const renderTitle = () => {
+        if (title === "Community Powered Recycling") {
+            return (
+                <>
+                    Community <br />
+                    <span className="text-[#63C14B]">Powered</span> <br />
+                    Recycling
+                </>
+            )
+        }
+        return <div dangerouslySetInnerHTML={{ __html: title.replace(/\n/g, "<br />") }} />
+    };
 
     return (
         <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
@@ -25,7 +57,7 @@ export function Hero() {
                     playsInline
                     className="w-full h-full object-cover opacity-60"
                 >
-                    <source src="/assets/videos/video-2.mp4" type="video/mp4" />
+                    <source src={videoUrl} type="video/mp4" />
                 </video>
 
                 {/* Darker Overlay - 70% Opacity */}
@@ -43,9 +75,7 @@ export function Hero() {
                     transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
                     className="text-5xl md:text-7xl lg:text-[7vw] leading-[1.0] md:leading-[0.9] font-bold text-white tracking-tighter uppercase mb-6 md:mb-8"
                 >
-                    Community <br />
-                    <span className="text-[#63C14B]">Powered</span> <br />
-                    Recycling
+                    {renderTitle()}
                 </motion.h1>
 
                 <motion.p
@@ -54,7 +84,7 @@ export function Hero() {
                     transition={{ duration: 0.8, delay: 0.8 }}
                     className="text-white/80 text-base md:text-xl font-light tracking-wide max-w-2xl mb-8 md:mb-10 px-4"
                 >
-                    We are a community powered plastic recycling initiative. We collect at source, reduce waste, and protect the planet.
+                    {subtitle}
                 </motion.p>
 
                 <motion.div
@@ -63,11 +93,11 @@ export function Hero() {
                     transition={{ duration: 1, delay: 1.2 }}
                     className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-6 sm:px-0"
                 >
-                    <a href="/about" className="px-8 py-4 bg-[#63C14B] text-white font-bold uppercase tracking-widest text-xs hover:bg-[#52a33d] transition-colors rounded-full w-full sm:w-auto">
-                        Our Mission
+                    <a href={ctaPrimaryLink} className="px-8 py-4 bg-[#63C14B] text-white font-bold uppercase tracking-widest text-xs hover:bg-[#52a33d] transition-colors rounded-full w-full sm:w-auto">
+                        {ctaPrimaryLabel}
                     </a>
-                    <a href="/sponsor" className="px-8 py-4 border border-white/30 text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all rounded-full w-full sm:w-auto">
-                        Sponsor a Bag
+                    <a href={ctaSecondaryLink} className="px-8 py-4 border border-white/30 text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all rounded-full w-full sm:w-auto">
+                        {ctaSecondaryLabel}
                     </a>
                 </motion.div>
             </div>

@@ -3,31 +3,47 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const guides = [
-    {
-        num: "01",
-        action: "Drain",
-        desc: "Empty all liquid contents. Clean bottles ensure 100% recyclability and prevent contamination.",
-        color: "bg-blue-500",
-        img: "/assets/images/recycle_drain_black.png"
-    },
-    {
-        num: "02",
-        action: "Squash",
-        desc: "Crush the bottle flat. This saves 3x the space in your bin and our collection trucks.",
-        color: "bg-orange-500",
-        img: "/assets/images/recycle_squash_black.png"
-    },
-    {
-        num: "03",
-        action: "Cap On",
-        desc: "Put the cap back on after squashing. We recycle both the bottle (PET) and the cap (HDPE).",
-        color: "bg-[#63C14B]",
-        img: "/assets/images/recycle_cap_black.png"
-    },
-];
+interface GuideItem {
+    num: string;
+    action: string;
+    desc: string;
+    color: string;
+    img: string;
+}
 
-export function RecycleGuide() {
+interface RecycleGuideProps {
+    title?: string;
+    subtitle?: string;
+    guidesList?: GuideItem[];
+}
+
+export function RecycleGuide({
+    title = "How To <br /> <span class='text-[#63C14B]'>Prepare</span>",
+    subtitle = "3 simple steps to ensure your plastic waste is ready for a new life.",
+    guidesList = [
+        {
+            num: "01",
+            action: "Drain",
+            desc: "Empty all liquid contents. Clean bottles ensure 100% recyclability and prevent contamination.",
+            color: "bg-blue-500",
+            img: "/assets/images/recycle_drain_black.png"
+        },
+        {
+            num: "02",
+            action: "Squash",
+            desc: "Crush the bottle flat. This saves 3x the space in your bin and our collection trucks.",
+            color: "bg-orange-500",
+            img: "/assets/images/recycle_squash_black.png"
+        },
+        {
+            num: "03",
+            action: "Cap On",
+            desc: "Put the cap back on after squashing. We recycle both the bottle (PET) and the cap (HDPE).",
+            color: "bg-[#63C14B]",
+            img: "/assets/images/recycle_cap_black.png"
+        },
+    ]
+}: RecycleGuideProps) {
     return (
         <section className="py-40 px-6 bg-[#F5F5F7] text-black overflow-hidden">
             <div className="max-w-7xl mx-auto">
@@ -38,9 +54,7 @@ export function RecycleGuide() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9]">
-                            How To <br />
-                            <span className="text-[#63C14B]">Prepare</span>
+                        <h2 className="text-6xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9]" dangerouslySetInnerHTML={{ __html: title }}>
                         </h2>
                     </motion.div>
 
@@ -51,12 +65,12 @@ export function RecycleGuide() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-xl text-neutral-500 max-w-sm text-right md:text-right"
                     >
-                        3 simple steps to ensure your plastic waste is ready for a new life.
+                        {subtitle}
                     </motion.p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {guides.map((item, i) => (
+                    {guidesList.map((item, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, y: 50 }}

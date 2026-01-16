@@ -7,26 +7,43 @@ import { ArrowUpRight } from "lucide-react";
 import { teamData } from "@/data/team";
 import { TeamModal } from "@/components/team/TeamModal";
 
-export function Team({ hideHeader = false }: { hideHeader?: boolean }) {
+interface TeamMember {
+    name: string;
+    role: string;
+    img: string;
+}
+
+interface TeamProps {
+    title?: string;
+    description?: string;
+    teamList?: TeamMember[];
+    hideHeader?: boolean;
+}
+
+export function Team({
+    title = "The <br /> Team",
+    description = "Driven by passion, united by a vision for a cleaner planet.",
+    teamList = teamData,
+    hideHeader = false
+}: TeamProps) {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    const [selectedMember, setSelectedMember] = useState<typeof teamData[0] | null>(null);
+    const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
     return (
         <section className={`px-[5vw] bg-white text-black relative cursor-default ${hideHeader ? 'py-20' : 'py-40'}`}>
             <div className="max-w-[1800px] mx-auto">
                 {!hideHeader && (
                     <div className="flex items-end justify-between mb-24">
-                        <h2 className="text-[5vw] leading-[0.9] font-bold tracking-tighter uppercase">
-                            The <br /> Team
+                        <h2 className="text-[5vw] leading-[0.9] font-bold tracking-tighter uppercase" dangerouslySetInnerHTML={{ __html: title }}>
                         </h2>
                         <p className="max-w-xs text-neutral-500 text-sm">
-                            Driven by passion, united by a vision for a cleaner planet.
+                            {description}
                         </p>
                     </div>
                 )}
 
                 <div className="flex flex-col">
-                    {teamData.map((member, i) => (
+                    {teamList.map((member, i) => (
                         <div
                             key={i}
                             className="group relative border-t border-black/10 py-12 flex flex-col md:flex-row justify-between items-start md:items-center transition-colors hover:bg-neutral-50 cursor-pointer"
@@ -69,7 +86,7 @@ export function Team({ hideHeader = false }: { hideHeader?: boolean }) {
 
             {/* DESKTOP HOVER IMAGE: Floating reveal on large screens only */}
             <AnimatePresence>
-                {hoveredIndex !== null && (
+                {hoveredIndex !== null && teamList[hoveredIndex] && (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8, x: -50 }}
                         animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -78,7 +95,7 @@ export function Team({ hideHeader = false }: { hideHeader?: boolean }) {
                         className="pointer-events-none fixed top-1/3 right-[10vw] z-10 w-[20vw] h-[30vh] hidden lg:block"
                     >
                         <Image
-                            src={teamData[hoveredIndex].img}
+                            src={teamList[hoveredIndex].img}
                             alt="Team"
                             fill
                             className="object-cover grayscale"
@@ -88,9 +105,12 @@ export function Team({ hideHeader = false }: { hideHeader?: boolean }) {
             </AnimatePresence>
 
             {/* Modal Popup */}
+            {/* Note: TeamModal type might complain if we pass generic TeamMember if it expects strict type. 
+                Assuming TeamModal handles {name, role, img} correctly or we cast it if needed. 
+                For now passing member as is. */}
             <TeamModal
                 isOpen={!!selectedMember}
-                member={selectedMember}
+                member={selectedMember as any}
                 onClose={() => setSelectedMember(null)}
             />
         </section>

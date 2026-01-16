@@ -3,43 +3,56 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-const services = [
-    {
-        title: "Household Collection",
-        description: "Doorstep pickup for homes. We provide the bags, you fill them. Simple, free, and impactful.",
-        image: "/assets/images/service_household_white_logo.png",
-        tag: "Residential"
-    },
-    {
-        title: "Commercial Waste",
-        description: "Tailored recycling programs for schools, offices, and estates. Turn your waste into social capital.",
-        image: "/assets/images/service_commercial_v2.png",
-        tag: "B2B / B2G"
-    },
-    {
-        title: "Material Recovery",
-        description: "Our advanced facility processes raw waste into clean, manufacturing-grade flakes and bales.",
-        image: "/assets/images/service_factory_v2.png",
-        tag: "Industrial"
-    }
-];
+interface ServiceItem {
+    title: string;
+    description: string;
+    image: string;
+    tag: string;
+}
 
-export function Services() {
+interface ServicesProps {
+    title?: string;
+    description?: string;
+    servicesList?: ServiceItem[];
+}
+
+export function Services({
+    title = "What <br /> <span class='text-[#63C14B]'>We Do</span>",
+    description = "Bridging the gap between community waste and industrial value through three core pillars.",
+    servicesList = [
+        {
+            title: "Household Collection",
+            description: "Doorstep pickup for homes. We provide the bags, you fill them. Simple, free, and impactful.",
+            image: "/assets/images/service_household_white_logo.png",
+            tag: "Residential"
+        },
+        {
+            title: "Commercial Waste",
+            description: "Tailored recycling programs for schools, offices, and estates. Turn your waste into social capital.",
+            image: "/assets/images/service_commercial_v2.png",
+            tag: "B2B / B2G"
+        },
+        {
+            title: "Material Recovery",
+            description: "Our advanced facility processes raw waste into clean, manufacturing-grade flakes and bales.",
+            image: "/assets/images/service_factory_v2.png",
+            tag: "Industrial"
+        }
+    ]
+}: ServicesProps) {
     return (
         <section id="services" className="py-24 px-6 bg-white text-black overflow-hidden border-t border-b border-black/5">
             <div className="max-w-[1800px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 px-4">
-                    <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none">
-                        What <br />
-                        <span className="text-[#63C14B]">We Do</span>
+                    <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none" dangerouslySetInnerHTML={{ __html: title }}>
                     </h2>
                     <p className="text-neutral-500 max-w-sm text-right mt-6 md:mt-0 font-medium">
-                        Bridging the gap between community waste and industrial value through three core pillars.
+                        {description}
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-auto lg:h-[600px]">
-                    {services.map((service, index) => (
+                    {servicesList.map((service, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, y: 50 }}

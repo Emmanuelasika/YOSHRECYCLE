@@ -13,7 +13,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-export function BlogPreview() {
+interface BlogPreviewProps {
+    title?: string;
+    buttonText?: string;
+    buttonUrl?: string;
+}
+
+export function BlogPreview({
+    title = "Latest <br /> <span class='text-[#63C14B]'>Blog</span>",
+    buttonText = "View Blog",
+    buttonUrl = "/blog"
+}: BlogPreviewProps) {
     const [posts, setPosts] = useState<any[]>([]);
 
     useEffect(() => {
@@ -36,9 +46,8 @@ export function BlogPreview() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                         className="text-5xl md:text-7xl font-bold tracking-tighter uppercase leading-none"
+                        dangerouslySetInnerHTML={{ __html: title }}
                     >
-                        Latest <br />
-                        <span className="text-[#63C14B]">Blog</span>
                     </motion.h2>
 
                     <motion.div
@@ -46,9 +55,9 @@ export function BlogPreview() {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        <Link href="/blog">
+                        <Link href={buttonUrl}>
                             <Button size="lg" className="hidden md:inline-flex bg-black text-white hover:bg-[#63C14B] hover:text-black">
-                                View Blog <ArrowUpRight className="ml-2 h-4 w-4" />
+                                {buttonText} <ArrowUpRight className="ml-2 h-4 w-4" />
                             </Button>
                         </Link>
                     </motion.div>
