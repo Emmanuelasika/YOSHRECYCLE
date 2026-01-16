@@ -39,6 +39,7 @@ export function Navigation() {
                         alt="Yosh Recycle"
                         fill
                         className="object-contain"
+                        sizes="160px"
                         priority
                     />
                 </Link>
