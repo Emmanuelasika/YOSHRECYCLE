@@ -1,0 +1,4 @@
+ReferenceError: VIDEO_DIR is not defined
+    at uploadFile (file:///C:/Users/user/Yosh/scripts/migrate-content.mjs:74:64)
+    at migrate (file:///C:/Users/user/Yosh/scripts/migrate-content.mjs:109:35)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)

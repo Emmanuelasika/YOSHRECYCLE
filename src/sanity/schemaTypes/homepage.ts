@@ -7,8 +7,12 @@ export const homepage = defineType({
     groups: [
         { name: 'hero', title: 'Hero' },
         { name: 'mission', title: 'Mission' },
+        { name: 'whyItMatters', title: 'Why It Matters' },
         { name: 'impact', title: 'Impact' },
+        { name: 'process', title: 'Process' },
         { name: 'services', title: 'Services' },
+        { name: 'recycleGuide', title: 'Recycle Guide' },
+        { name: 'products', title: 'Products' },
         { name: 'gallery', title: 'Gallery' },
         { name: 'testimonials', title: 'Testimonials' },
         { name: 'sponsor', title: 'Sponsor CTA' },
@@ -106,6 +110,38 @@ export const homepage = defineType({
             initialValue: 'Free collection for households and businesses.',
         }),
 
+        // Why It Matters Section
+        defineField({
+            name: 'whyTitle',
+            title: 'Why It Matters Title',
+            type: 'string',
+            group: 'whyItMatters',
+            initialValue: 'Why It Matters',
+        }),
+        defineField({
+            name: 'whySubtitle',
+            title: 'Why It Matters Subtitle',
+            type: 'string',
+            group: 'whyItMatters',
+            initialValue: 'Abuja produces over 13,000 tonnes of waste daily. We are the defense line.',
+        }),
+        defineField({
+            name: 'whyList',
+            title: 'Why It Matters List',
+            type: 'array',
+            group: 'whyItMatters',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'title', type: 'string', title: 'Title' },
+                        { name: 'desc', type: 'text', title: 'Description' },
+                        { name: 'image', type: 'image', title: 'Image' },
+                    ],
+                },
+            ],
+        }),
+
         // Impact Section
         defineField({
             name: 'impactTitle',
@@ -132,6 +168,51 @@ export const homepage = defineType({
                     fields: [
                         { name: 'val', type: 'string', title: 'Value' },
                         { name: 'label', type: 'string', title: 'Label' },
+                    ],
+                },
+            ],
+        }),
+
+        // Process Section
+        defineField({
+            name: 'processTitle',
+            title: 'Process Title',
+            type: 'string',
+            group: 'process',
+            initialValue: 'The Process',
+        }),
+        defineField({
+            name: 'processDescription',
+            title: 'Process Description',
+            type: 'text',
+            group: 'process',
+            initialValue: 'A transparent, verified workflow that turns community waste into global value.',
+        }),
+        defineField({
+            name: 'processSteps',
+            title: 'Process Steps',
+            type: 'array',
+            group: 'process',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'id', type: 'string', title: 'Step Number (e.g. 01)' },
+                        { name: 'title', type: 'string', title: 'Title' },
+                        { name: 'desc', type: 'text', title: 'Description' },
+                        {
+                            name: 'icon',
+                            type: 'string',
+                            title: 'Icon Name',
+                            options: {
+                                list: [
+                                    { title: 'Package', value: 'Package' },
+                                    { title: 'Truck', value: 'Truck' },
+                                    { title: 'Recycle', value: 'Recycle' },
+                                    { title: 'School', value: 'School' },
+                                ]
+                            }
+                        },
                     ],
                 },
             ],
@@ -165,6 +246,73 @@ export const homepage = defineType({
                         { name: 'description', type: 'text', title: 'Description' },
                         { name: 'image', type: 'image', title: 'Image' },
                         { name: 'tag', type: 'string', title: 'Tag' },
+                    ],
+                },
+            ],
+        }),
+
+        // Recycle Guide Section
+        defineField({
+            name: 'guideTitle',
+            title: 'Guide Title',
+            type: 'string',
+            group: 'recycleGuide',
+            initialValue: 'How To Prepare',
+        }),
+        defineField({
+            name: 'guideSubtitle',
+            title: 'Guide Subtitle',
+            type: 'string',
+            group: 'recycleGuide',
+            initialValue: '3 simple steps to ensure your plastic waste is ready for a new life.',
+        }),
+        defineField({
+            name: 'guideSteps',
+            title: 'Guide Steps',
+            type: 'array',
+            group: 'recycleGuide',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'num', type: 'string', title: 'Step Number' },
+                        { name: 'action', type: 'string', title: 'Action Title' },
+                        { name: 'desc', type: 'text', title: 'Description' },
+                        { name: 'color', type: 'string', title: 'Tailwind Color Class' },
+                        { name: 'image', type: 'image', title: 'Image' },
+                    ],
+                },
+            ],
+        }),
+
+        // Products Section
+        defineField({
+            name: 'productsTitle',
+            title: 'Products Title',
+            type: 'string',
+            group: 'products',
+            initialValue: 'Our Products',
+        }),
+        defineField({
+            name: 'productsDescription',
+            title: 'Products Description',
+            type: 'text',
+            group: 'products',
+            initialValue: 'We supply the manufacturing industry with high-quality recycled raw materials.',
+        }),
+        defineField({
+            name: 'productsList',
+            title: 'Products List',
+            type: 'array',
+            group: 'products',
+            of: [
+                {
+                    type: 'object',
+                    fields: [
+                        { name: 'title', type: 'string', title: 'Title' },
+                        { name: 'subtitle', type: 'string', title: 'Subtitle' },
+                        { name: 'desc', type: 'text', title: 'Description' },
+                        { name: 'image', type: 'image', title: 'Image' },
                     ],
                 },
             ],

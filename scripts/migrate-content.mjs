@@ -47,11 +47,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ASSETS_DIR = path.join(process.cwd(), 'public', 'assets', 'images');
 const VIDEO_DIR = path.join(process.cwd(), 'public', 'assets', 'videos');
+const PRODUCTS_DIR = path.join(process.cwd(), 'public', 'assets', 'products');
 
 async function uploadImage(filename) {
     const filePath = path.join(ASSETS_DIR, filename);
     if (!fs.existsSync(filePath)) {
         console.warn(`Image not found: ${filename}`);
+        return null;
+    }
+    const buffer = fs.readFileSync(filePath);
+    const asset = await client.assets.upload('image', buffer, { filename });
+    return asset._id;
+}
+
+async function uploadProductImage(filename) {
+    const filePath = path.join(PRODUCTS_DIR, filename);
+    if (!fs.existsSync(filePath)) {
+        console.warn(`Product Image not found: ${filename}`);
         return null;
     }
     const buffer = fs.readFileSync(filePath);
@@ -79,6 +91,22 @@ async function migrate() {
         const service1ImgId = await uploadImage('service_household_white.png');
         const service2ImgId = await uploadImage('service_commercial_v2.png');
         const service3ImgId = await uploadImage('service_factory_v2.png');
+
+        // Why Items
+        const why1ImgId = await uploadImage('pollution_river.png');
+        const why2ImgId = await uploadImage('recycling_worker.png');
+        const why3ImgId = await uploadImage('future_child.png');
+
+        // Guide Items
+        const guide1ImgId = await uploadImage('recycle_drain_black.png');
+        const guide2ImgId = await uploadImage('recycle_squash_black.png');
+        const guide3ImgId = await uploadImage('recycle_cap_black.png');
+
+        // Product Items
+        const prod1ImgId = await uploadProductImage('hot-washed.png');
+        const prod2ImgId = await uploadProductImage('cold-washed.png');
+        const prod3ImgId = await uploadProductImage('bales.png');
+
         const heroVideoId = await uploadFile('video-2.mp4', 'file');
 
         const galleryImages = [
@@ -106,6 +134,30 @@ async function migrate() {
             missionStat1Label: 'Plastic recovered annually from local communities.',
             missionStat2Value: 'Zero Cost',
             missionStat2Label: 'Free collection for households and businesses.',
+
+            whyTitle: 'Why It Matters',
+            whySubtitle: 'Abuja produces over 13,000 tonnes of waste daily. We are the defense line.',
+            whyList: [
+                {
+                    _key: 'w1',
+                    title: 'Stop Pollution',
+                    desc: 'Preventing plastics from clogging our drains and polluting our precious waterways.',
+                    image: why1ImgId ? { _type: 'image', asset: { _ref: why1ImgId } } : undefined
+                },
+                {
+                    _key: 'w2',
+                    title: 'Create Jobs',
+                    desc: 'Building a green economy that provides stable employment for women and youth.',
+                    image: why2ImgId ? { _type: 'image', asset: { _ref: why2ImgId } } : undefined
+                },
+                {
+                    _key: 'w3',
+                    title: 'Future Proof',
+                    desc: 'Educating the next generation to value resources and protect their environment.',
+                    image: why3ImgId ? { _type: 'image', asset: { _ref: why3ImgId } } : undefined
+                }
+            ],
+
             impactTitle: 'Real Numbers.',
             impactSubtitle: 'Measurable impact on our environment and our local economy.',
             impactStats: [
@@ -113,6 +165,40 @@ async function migrate() {
                 { _key: 'stat2', val: '5k+', label: 'Households Reached' },
                 { _key: 'stat3', val: '80+', label: 'Partner Schools' },
             ],
+
+            processTitle: 'The Process',
+            processDescription: 'A transparent, verified workflow that turns community waste into global value.',
+            processSteps: [
+                {
+                    _key: 'p1',
+                    id: '01',
+                    title: 'Distribute Bags',
+                    desc: 'We empower the community by providing branded, heavy-duty collection bags to households, schools, and local businesses.',
+                    icon: 'Package'
+                },
+                {
+                    _key: 'p2',
+                    id: '02',
+                    title: 'Collect at Source',
+                    desc: 'Our logistics team executes scheduled pickups directly from the source, ensuring materials remain clean, sorted, and high-quality.',
+                    icon: 'Truck'
+                },
+                {
+                    _key: 'p3',
+                    id: '03',
+                    title: 'Sell to Recyclers',
+                    desc: 'We verify and transport materials to vetted local recycling facilities, closing the loop and contributing to the circular economy.',
+                    icon: 'Recycle'
+                },
+                {
+                    _key: 'p4',
+                    id: '04',
+                    title: 'Community Education',
+                    desc: 'Beyond collection, we run workshops and awareness drive to instill a culture of sustainability in the next generation.',
+                    icon: 'School'
+                }
+            ],
+
             servicesTitle: 'What We Do',
             servicesDescription: 'Bridging the gap between community waste and industrial value through three core pillars.',
             servicesList: [
@@ -138,6 +224,62 @@ async function migrate() {
                     tag: 'Industrial'
                 }
             ],
+
+            guideTitle: 'How To Prepare',
+            guideSubtitle: '3 simple steps to ensure your plastic waste is ready for a new life.',
+            guideSteps: [
+                {
+                    _key: 'g1',
+                    num: '01',
+                    action: 'Drain',
+                    desc: 'Empty all liquid contents. Clean bottles ensure 100% recyclability and prevent contamination.',
+                    color: 'bg-blue-500',
+                    image: guide1ImgId ? { _type: 'image', asset: { _ref: guide1ImgId } } : undefined
+                },
+                {
+                    _key: 'g2',
+                    num: '02',
+                    action: 'Squash',
+                    desc: 'Crush the bottle flat. This saves 3x the space in your bin and our collection trucks.',
+                    color: 'bg-orange-500',
+                    image: guide2ImgId ? { _type: 'image', asset: { _ref: guide2ImgId } } : undefined
+                },
+                {
+                    _key: 'g3',
+                    num: '03',
+                    action: 'Cap On',
+                    desc: 'Put the cap back on after squashing. We recycle both the bottle (PET) and the cap (HDPE).',
+                    color: 'bg-[#63C14B]',
+                    image: guide3ImgId ? { _type: 'image', asset: { _ref: guide3ImgId } } : undefined
+                }
+            ],
+
+            productsTitle: 'Our Products',
+            productsDescription: 'We supply the manufacturing industry with high-quality recycled raw materials.',
+            productsList: [
+                {
+                    _key: 'pr1',
+                    title: 'Hot Washed',
+                    subtitle: 'PET Flakes',
+                    desc: 'Premium purity (<50ppm PVC) for high-end fiber application.',
+                    image: prod1ImgId ? { _type: 'image', asset: { _ref: prod1ImgId } } : undefined
+                },
+                {
+                    _key: 'pr2',
+                    title: 'Cold Washed',
+                    subtitle: 'PET Flakes',
+                    desc: 'Industrial grade flakes for strapping and non-food packaging.',
+                    image: prod2ImgId ? { _type: 'image', asset: { _ref: prod2ImgId } } : undefined
+                },
+                {
+                    _key: 'pr3',
+                    title: 'Pressed Bales',
+                    subtitle: 'HDPE/PET',
+                    desc: 'High density bales sorted by color and polymer type.',
+                    image: prod3ImgId ? { _type: 'image', asset: { _ref: prod3ImgId } } : undefined
+                },
+            ],
+
             galleryTitle: 'Work in Action.',
             galleryImages: galleryImageIds.map(id => ({ _key: id, _type: 'image', asset: { _ref: id } })),
             testimonialsTitle: 'What our communities say about Yosh Recycle',
@@ -324,9 +466,14 @@ async function migrate() {
         console.log("Migration completed successfully!");
 
     } catch (error) {
+        fs.writeFileSync('migration_error.txt', error.stack || String(error));
         console.error("Migration failed:", error);
         process.exit(1);
     }
 }
 
-migrate();
+migrate().catch(error => {
+    console.error("Top level error:", error);
+    fs.writeFileSync('migration_error_top.txt', error.stack || String(error));
+    process.exit(1);
+});

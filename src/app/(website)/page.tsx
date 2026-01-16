@@ -23,6 +23,24 @@ function transformHomepageData(data: any) {
         image: service.image ? urlFor(service.image).url() : null
     })) || [];
 
+    // Transform why list images
+    const whyList = data.whyList?.map((item: any) => ({
+        ...item,
+        img: item.image ? urlFor(item.image).url() : null
+    })) || [];
+
+    // Transform guide steps images
+    const guideSteps = data.guideSteps?.map((item: any) => ({
+        ...item,
+        img: item.image ? urlFor(item.image).url() : null
+    })) || [];
+
+    // Transform products list images
+    const productsList = data.productsList?.map((item: any) => ({
+        ...item,
+        img: item.image ? urlFor(item.image).url() : null
+    })) || [];
+
     // Transform gallery images
     const galleryImages = data.galleryImages?.map((img: any) =>
         urlFor(img).width(800).height(600).url()
@@ -31,6 +49,9 @@ function transformHomepageData(data: any) {
     return {
         ...data,
         servicesList,
+        whyList,
+        guideSteps,
+        productsList,
         galleryImages,
     };
 }

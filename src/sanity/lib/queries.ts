@@ -57,9 +57,24 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
   missionStat1Label,
   missionStat2Value,
   missionStat2Label,
+  whyTitle,
+  whySubtitle,
+  whyList[] {
+    title,
+    desc,
+    image
+  },
   impactTitle,
   impactSubtitle,
   impactStats,
+  processTitle,
+  processDescription,
+  processSteps[] {
+    id,
+    title,
+    desc,
+    icon
+  },
   servicesTitle,
   servicesDescription,
   servicesList[] {
@@ -67,6 +82,23 @@ export const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0] {
     description,
     image,
     tag
+  },
+  guideTitle,
+  guideSubtitle,
+  guideSteps[] {
+    num,
+    action,
+    desc,
+    color,
+    image
+  },
+  productsTitle,
+  productsDescription,
+  productsList[] {
+    title,
+    subtitle,
+    desc,
+    image
   },
   galleryTitle,
   galleryImages,
