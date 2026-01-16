@@ -1,6 +1,6 @@
 import { draftMode } from "next/headers";
 import { client } from "./client";
-import { VisualEditing } from "next-sanity";
+import { VisualEditing } from "next-sanity/visual-editing";
 
 // Helper to match the signature of the 'defineLive' version
 export const sanityFetch = async ({ query, params = {} }: { query: string; params?: any }) => {
