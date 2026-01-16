@@ -11,7 +11,7 @@ export const sanityFetch = async ({ query, params = {} }: { query: string; param
             return {
                 data: await client.withConfig({
                     token: process.env.SANITY_API_READ_TOKEN,
-                    perspective: 'previewDrafts',
+                    perspective: 'drafts',
                     useCdn: false,
                     stega: {
                         enabled: true,
