@@ -4,11 +4,19 @@ import { useState } from "react";
 import { Copy, Check, Building2 } from "lucide-react";
 import { toast } from "sonner";
 
-export function SponsorshipOptions() {
+interface SponsorshipOptionsProps {
+    accountDetails?: {
+        bankName: string;
+        accountName: string;
+        accountNumber: string;
+    };
+}
+
+export function SponsorshipOptions({ accountDetails }: SponsorshipOptionsProps) {
     const [copied, setCopied] = useState(false);
 
-    // Bank Details
-    const bankDetails = {
+    // Bank Details (fetched or fallback)
+    const bankDetails = accountDetails || {
         bankName: "Zenith Bank",
         accountName: "Yosh Recycle Limited",
         accountNumber: "1224978692"

@@ -333,10 +333,16 @@ async function migrate() {
         await client.createOrReplace({
             _id: 'sponsorPage',
             _type: 'sponsorPage',
-            heroTitle: "Sponsor A \nBrand Bag",
+            heroTitlePrefix: "Sponsor A",
+            heroTitleHighlight: "Brand Bag",
             heroSubtitle: "Transform your corporate social responsibility into tangible environmental action. Put your logo in the hands of the community.",
             statsHomesReached: "5,000+",
             statsPlasticCollected: "200k+",
+            accountDetails: {
+                bankName: "Zenith Bank",
+                accountName: "Yosh Recycling Limited",
+                accountNumber: "1229706340"
+            },
             benefitsTitle: "Why Support Us?",
             benefitsDescription: "Your sponsorship funds the critical infrastructure needed to collect, sort, and process waste at the source.",
             benefitsList: [

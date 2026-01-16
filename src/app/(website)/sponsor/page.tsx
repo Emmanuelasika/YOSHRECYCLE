@@ -38,7 +38,10 @@ export default async function SponsorPage() {
                         </div>
 
                         <h1 className="text-5xl md:text-7xl xl:text-8xl font-bold uppercase tracking-tighter mb-8 leading-[0.9]">
-                            {renderMultiline(data?.heroTitle) || <>Sponsor A <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#63C14B] via-emerald-400 to-[#63C14B] bg-300% animate-gradient">Brand Bag</span></>}
+                            {data?.heroTitlePrefix || "Sponsor A"} <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#63C14B] via-emerald-400 to-[#63C14B] bg-300% animate-gradient">
+                                {data?.heroTitleHighlight || "Brand Bag"}
+                            </span>
                         </h1>
                         <p className="text-xl md:text-2xl text-neutral-400 max-w-xl leading-relaxed mb-12">
                             {data?.heroSubtitle || <>Transform your corporate social responsibility into tangible environmental action. <span className="text-white">Put your logo in the hands of the community.</span></>}
@@ -61,7 +64,7 @@ export default async function SponsorPage() {
                     <div className="w-full relative">
                         {/* Control Panel aesthetic container */}
                         <div className="bg-neutral-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-2 relative shadow-2xl">
-                            <SponsorshipOptions />
+                            <SponsorshipOptions accountDetails={data?.accountDetails} />
                         </div>
                     </div>
 

@@ -6,11 +6,18 @@ export const sponsorPage = defineType({
     type: 'document',
     fields: [
         defineField({
-            name: 'heroTitle',
-            title: 'Hero Title',
-            type: 'text',
-            initialValue: 'Sponsor A \nBrand Bag',
-            rows: 2,
+            name: 'heroTitlePrefix',
+            title: 'Hero Title Prefix',
+            type: 'string',
+            initialValue: 'Sponsor A',
+            description: 'The first part of the title (white text)',
+        }),
+        defineField({
+            name: 'heroTitleHighlight',
+            title: 'Hero Title Highlight',
+            type: 'string',
+            initialValue: 'Brand Bag',
+            description: 'The second part of the title (gradient colored)',
         }),
         defineField({
             name: 'heroSubtitle',
@@ -29,6 +36,16 @@ export const sponsorPage = defineType({
             title: 'Stats: Plastic Collected',
             type: 'string',
             initialValue: '200k+',
+        }),
+        defineField({
+            name: 'accountDetails',
+            title: 'Bank Account Details',
+            type: 'object',
+            fields: [
+                { name: 'bankName', type: 'string', title: 'Bank Name', initialValue: 'Zenith Bank' },
+                { name: 'accountName', type: 'string', title: 'Account Name', initialValue: 'Yosh Recycling Limited' },
+                { name: 'accountNumber', type: 'string', title: 'Account Number', initialValue: '1229706340' },
+            ],
         }),
         defineField({
             name: 'benefitsTitle',

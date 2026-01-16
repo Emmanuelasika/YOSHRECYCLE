@@ -132,10 +132,16 @@ export const ABOUT_PAGE_QUERY = groq`*[_type == "aboutPage"][0] {
 
 // Get sponsor page content
 export const SPONSOR_PAGE_QUERY = groq`*[_type == "sponsorPage"][0] {
-  heroTitle,
+  heroTitlePrefix,
+  heroTitleHighlight,
   heroSubtitle,
   statsHomesReached,
   statsPlasticCollected,
+  accountDetails {
+    bankName,
+    accountName,
+    accountNumber
+  },
   benefitsTitle,
   benefitsDescription,
   benefitsList
