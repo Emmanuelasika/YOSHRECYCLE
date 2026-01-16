@@ -249,7 +249,10 @@ export function registerAllComponents() {
             images: {
                 type: "array",
                 itemType: {
-                    type: "imageUrl" // Simplified for list of strings/urls
+                    type: "object",
+                    fields: {
+                        url: { type: "imageUrl" }
+                    }
                 }
             }
         }
