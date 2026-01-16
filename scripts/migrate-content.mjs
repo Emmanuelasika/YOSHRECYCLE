@@ -62,6 +62,94 @@ async function migrate() {
     console.log("Starting migration...");
 
     try {
+        // --- HOMEPAGE ---
+        console.log("Migrating Homepage...");
+        const service1ImgId = await uploadImage('service_household_white.png');
+        const service2ImgId = await uploadImage('service_commercial_v2.png');
+        const service3ImgId = await uploadImage('service_factory_v2.png');
+
+        const galleryImages = [
+            'gallery-1.jpg', 'gallery-2.jpg', 'gallery-3.jpg', 'gallery-4.jpg',
+            'gallery-5.jpg', 'gallery-6.jpg', 'gallery-7.jpg', 'gallery-8.jpg'
+        ];
+        const galleryImageIds = [];
+        for (const img of galleryImages) {
+            const id = await uploadImage(img);
+            if (id) galleryImageIds.push(id);
+        }
+
+        await client.createOrReplace({
+            _id: 'homepage',
+            _type: 'homepage',
+            heroTitle: 'Community Powered Recycling',
+            heroSubtitle: 'We are a community powered plastic recycling initiative. We collect at source, reduce waste, and protect the planet.',
+            heroVideoUrl: '/assets/videos/video-2.mp4',
+            heroPrimaryButtonLabel: 'Our Mission',
+            heroPrimaryButtonLink: '/about',
+            heroSecondaryButtonLabel: 'Sponsor a Bag',
+            heroSecondaryButtonLink: '/sponsor',
+            missionTitle: 'To rid Nigeria of plastic waste, one state at a time.',
+            missionStat1Value: '350+ Tons',
+            missionStat1Label: 'Plastic recovered annually from local communities.',
+            missionStat2Value: 'Zero Cost',
+            missionStat2Label: 'Free collection for households and businesses.',
+            impactTitle: 'Real Numbers.',
+            impactSubtitle: 'Measurable impact on our environment and our local economy.',
+            impactStats: [
+                { _key: 'stat1', val: '350+', label: 'Tons Recovered' },
+                { _key: 'stat2', val: '5k+', label: 'Households Reached' },
+                { _key: 'stat3', val: '80+', label: 'Partner Schools' },
+            ],
+            servicesTitle: 'What We Do',
+            servicesDescription: 'Bridging the gap between community waste and industrial value through three core pillars.',
+            servicesList: [
+                {
+                    _key: 'srv1',
+                    title: 'Household Collection',
+                    description: 'We provide households with free recycling bags and collect them weekly, rewarding consistency with points.',
+                    image: service1ImgId ? { _type: 'image', asset: { _ref: service1ImgId } } : undefined,
+                    tag: 'Residential'
+                },
+                {
+                    _key: 'srv2',
+                    title: 'Commercial Recovery',
+                    description: 'Partnering with hotels, restaurants, and offices to implement seamless waste sorting and recovery systems.',
+                    image: service2ImgId ? { _type: 'image', asset: { _ref: service2ImgId } } : undefined,
+                    tag: 'Commercial'
+                },
+                {
+                    _key: 'srv3',
+                    title: 'Industrial Feedstock',
+                    description: 'Processing recovered plastics into high-quality flakes and pellets for manufacturing use.',
+                    image: service3ImgId ? { _type: 'image', asset: { _ref: service3ImgId } } : undefined,
+                    tag: 'Industrial'
+                }
+            ],
+            galleryTitle: 'Work in Action.',
+            galleryImages: galleryImageIds.map(id => ({ _key: id, _type: 'image', asset: { _ref: id } })),
+            testimonialsTitle: 'What our communities say about Yosh Recycle',
+            testimonialsList: [
+                {
+                    _key: 't1',
+                    quote: 'Yosh Recycle has transformed how our estate handles waste. The pickup is reliable and the team is always courteous.',
+                    author: 'Mrs. Adewale',
+                    role: 'Gwarinpa Resident'
+                },
+                {
+                    _key: 't2',
+                    quote: 'Partnering with Yosh for our CSR initiative was seamless. Seeing the direct impact on the environment is fulfilling.',
+                    author: 'John Okechukwu',
+                    role: 'Corporate Partner'
+                }
+            ],
+            sponsorTitle: 'Sponsor A Brand Bag Campaign',
+            sponsorBadgeValue: '50kg+',
+            sponsorBadgeLabel: 'Plastic Capacity',
+            teamTitle: 'The Team',
+            teamDescription: 'Driven by passion, united by a vision for a cleaner planet.',
+            blogPreviewTitle: 'Latest Blog'
+        });
+
         // --- ABOUT PAGE ---
         console.log("Migrating About Page...");
         const aboutBeforeImgId = await uploadImage('about_river_polluted_v2.png');

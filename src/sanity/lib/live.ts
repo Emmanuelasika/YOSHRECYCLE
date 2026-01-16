@@ -1,8 +1,25 @@
+import { draftMode } from "next/headers";
 import { client } from "./client";
 
 // Helper to match the signature of the 'defineLive' version
 export const sanityFetch = async ({ query, params = {} }: { query: string; params?: any }) => {
     try {
+        const { isEnabled } = await draftMode();
+
+        if (isEnabled) {
+            return {
+                data: await client.withConfig({
+                    token: process.env.SANITY_API_READ_TOKEN,
+                    perspective: 'previewDrafts',
+                    useCdn: false,
+                    stega: {
+                        enabled: true,
+                        studioUrl: '/studio'
+                    }
+                }).fetch(query, params)
+            };
+        }
+
         const data = await client.fetch(query, params);
         return { data };
     } catch (error) {
