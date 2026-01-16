@@ -19,10 +19,12 @@ export const homepage = defineType({
             initialValue: 'We are a community powered plastic recycling initiative. We collect at source, reduce waste, and protect the planet.',
         }),
         defineField({
-            name: 'heroVideoUrl',
-            title: 'Hero Video URL',
-            type: 'string',
-            initialValue: '/assets/videos/video-2.mp4',
+            name: 'heroVideo',
+            title: 'Hero Video',
+            type: 'file',
+            options: {
+                accept: 'video/*'
+            }
         }),
         defineField({
             name: 'heroPrimaryButtonLabel',

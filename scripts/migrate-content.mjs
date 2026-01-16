@@ -46,6 +46,7 @@ const client = createClient({
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ASSETS_DIR = path.join(process.cwd(), 'public', 'assets', 'images');
+const VIDEO_DIR = path.join(process.cwd(), 'public', 'assets', 'videos');
 
 async function uploadImage(filename) {
     const filePath = path.join(ASSETS_DIR, filename);
@@ -58,6 +59,17 @@ async function uploadImage(filename) {
     return asset._id;
 }
 
+async function uploadFile(filename, type = 'file') {
+    const filePath = path.join(type === 'image' ? ASSETS_DIR : VIDEO_DIR, filename);
+    if (!fs.existsSync(filePath)) {
+        console.warn(`File not found: ${filename}`);
+        return null;
+    }
+    const buffer = fs.readFileSync(filePath);
+    const asset = await client.assets.upload(type, buffer, { filename });
+    return asset._id;
+}
+
 async function migrate() {
     console.log("Starting migration...");
 
@@ -67,6 +79,7 @@ async function migrate() {
         const service1ImgId = await uploadImage('service_household_white.png');
         const service2ImgId = await uploadImage('service_commercial_v2.png');
         const service3ImgId = await uploadImage('service_factory_v2.png');
+        const heroVideoId = await uploadFile('video-2.mp4', 'file');
 
         const galleryImages = [
             'gallery-1.jpg', 'gallery-2.jpg', 'gallery-3.jpg', 'gallery-4.jpg',
@@ -83,7 +96,7 @@ async function migrate() {
             _type: 'homepage',
             heroTitle: 'Community Powered Recycling',
             heroSubtitle: 'We are a community powered plastic recycling initiative. We collect at source, reduce waste, and protect the planet.',
-            heroVideoUrl: '/assets/videos/video-2.mp4',
+            heroVideo: heroVideoId ? { _type: 'file', asset: { _ref: heroVideoId } } : undefined,
             heroPrimaryButtonLabel: 'Our Mission',
             heroPrimaryButtonLink: '/about',
             heroSecondaryButtonLabel: 'Sponsor a Bag',
