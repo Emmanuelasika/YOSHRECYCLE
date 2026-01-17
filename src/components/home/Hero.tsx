@@ -65,7 +65,7 @@ export function Hero({
                 <div className="absolute inset-0 bg-black/70 z-10"></div>
 
                 {/* Grain overlay for texture */}
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay z-20"></div>
+                <div className="absolute inset-0 bg-[url('/assets/images/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay z-20"></div>
             </motion.div>
 
             {/* Content */}

@@ -22,8 +22,8 @@ export default async function SponsorPage() {
 
     return (
         <main className="pt-24 min-h-screen bg-black text-white selection:bg-[#63C14B] selection:text-black relative overflow-hidden">
-            {/* Background Texture */}
-            <div className="fixed inset-0 pointer-events-none opacity-20 bg-[url('/assets/images/noise.svg')] z-0 mix-blend-overlay"></div>
+            {/* Background Texture - Inverted for dark mode visibility */}
+            <div className="fixed inset-0 pointer-events-none opacity-[0.15] bg-[url('/assets/images/noise.svg')] z-0 invert"></div>
             <div className="fixed top-0 right-0 w-[50vw] h-[50vw] bg-[#63C14B]/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
 
             {/* HERO SECTION with Integrated Payments */}

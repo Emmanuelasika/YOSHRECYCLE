@@ -30,7 +30,7 @@ export function SponsorshipOptions({ accountDetails }: SponsorshipOptionsProps) 
     };
 
     return (
-        <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto">
+        <div className="flex flex-col gap-6 w-full mx-auto">
             {/* OPTION 1: BANK TRANSFER (Only Option) */}
             <div className="bg-white border-2 border-[#63C14B]/20 rounded-3xl p-8 lg:p-12 hover:border-[#63C14B] transition-all group shadow-2xl relative overflow-hidden">
                 {/* Background Decoration */}
